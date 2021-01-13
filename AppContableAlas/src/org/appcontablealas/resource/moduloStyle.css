@@ -9,8 +9,8 @@
     -fx-background-size: stretch;
 }
 
-.bar{
-    -fx-background-color: #33b5e5;
+.bar {
+    -fx-background-color: black;
 }
 
 .paneRegresar{
@@ -77,8 +77,8 @@
     -fx-background-color: #2E2E2E;  
 }
 
-.boton{
-    -fx-background-color: #33b5e5;
+.boton {
+    -fx-background-color: #401474;
     -fx-cursor: hand;
 }
 
@@ -111,39 +111,39 @@
     -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 0, 0);
 }
 
-.paneProveedor{
-    -fx-background-image: url(../img/proveedores.png);
+.paneClientes {
+    -fx-background-image: url(../img/usuarioBlanco.png);
     -fx-background-size: stretch;
 }
 
 
-.paneProveedor:hover{
+.paneClientes:hover{
    -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 2, 2);
     
 }
-.paneProveedor:pressed{
+.paneClientes:pressed{
     -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 0, 0);
 }
 
 
 
-.paneCategoria{
-    -fx-background-image: url(../img/categoriaNombre.png);
-    -fx-background-size: stretch;
-}
-
-
-
-.paneProducto{
+.panePedidos {
     -fx-background-image: url(../img/producto.png);
     -fx-background-size: stretch;
 }
 
-.paneProducto:hover{
+
+
+.paneReporte {
+    -fx-background-image: url(../img/facturaBlanco.png);
+    -fx-background-size: stretch;
+}
+
+.paneReporte:hover{
    -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 2, 2);
     
 }
-.paneProducto:pressed{
+.paneReporte:pressed{
     -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 0, 0);
 }
 
@@ -153,3 +153,33 @@
     -fx-border-color: black;
     -fx-border-width: 0 0 1 0;
 }
+
+.paneFondo {
+    -fx-background-color: whitesmoke;
+    -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 2, 2);
+}
+
+.paneFondoImagen {
+    -fx-Background-image: url(../img/imagenFondo.png);
+}
+
+.paneFondoImagenSplit1 {
+    -fx-Background-image: url(../img/imagenNubes.png);
+    -fx-background-size: 215%;
+}
+
+.paneFondoImagenSplit2 {
+    -fx-Background-image: url(../img/imagenNubes.png);
+    -fx-background-size: 150%;
+}
+
+.textField {
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 1 0;
+}
+
+    .textField:hover {
+        -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 2, 2);
+    }
+

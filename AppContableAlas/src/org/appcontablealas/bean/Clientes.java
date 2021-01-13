@@ -1,24 +1,23 @@
 package org.appcontablealas.bean;
 
 
-public class Usuario {
+public class Clientes {
+    
     private int usuarioId;
     private String usuarioNombre;
     private String usuarioApellido;
     private String userName; 
     private String usuarioContrasena;
-    private String tipoUsuarioDesc;
 
-    public Usuario() {
+    public Clientes() {
     }
 
-    public Usuario(int usuarioId, String userName, String usuarioNombre, String usuarioApellido, String usuarioContrasena, String tipoUsuarioDesc) {
+    public Clientes(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena) {
         this.usuarioId = usuarioId;
-        this.userName = userName;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
+        this.userName = userName;
         this.usuarioContrasena = usuarioContrasena;
-        this.tipoUsuarioDesc = tipoUsuarioDesc;
     }
 
     public int getUsuarioId() {
@@ -27,14 +26,6 @@ public class Usuario {
 
     public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getUsuarioNombre() {
@@ -53,6 +44,14 @@ public class Usuario {
         this.usuarioApellido = usuarioApellido;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getUsuarioContrasena() {
         return usuarioContrasena;
     }
@@ -61,13 +60,6 @@ public class Usuario {
         this.usuarioContrasena = usuarioContrasena;
     }
 
-    public String getTipoUsuarioDesc() {
-        return tipoUsuarioDesc;
-    }
 
-    public void setTipoUsuarioDesc(String tipoUsuarioDesc) {
-        this.tipoUsuarioDesc = tipoUsuarioDesc;
-    }
-    
     
 }

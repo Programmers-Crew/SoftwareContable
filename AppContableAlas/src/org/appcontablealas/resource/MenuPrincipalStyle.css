@@ -11,24 +11,26 @@
     
 }
 .menu, .menu-item, .context-menu {
-    -fx-background-color: #0099CC;
+    -fx-background-color: black;
     -fx-cursor: hand;
 }
 .combo{
     
     -fx-background-color: transparent;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-border-width: 0 0 1 0;
+    -fx-text-fill:white
 }
 
-.menubar{
-    -fx-background-color: #0099CC;
-    
-    
+.textField {
+    -fx-text-fill: white
 }
-.menu-item:hover{
-    -fx-font-size:16px;
-    -fx-background-color: #33b5e5;
+.menubar {
+    -fx-background-color: black;
+}
+.menu-item:hover {
+    -fx-font-size: 16px;
+    -fx-background-color: #401474;
 }
 
 .menubar .container .label .text{
@@ -89,8 +91,8 @@
     -fx-background-size: 1500 100;
 }
 
-.boton{
-    -fx-background-color: #33b5e5;
+.boton {
+    -fx-background-color: #401474;
     -fx-cursor: hand;
 }
 
@@ -120,4 +122,19 @@
 .paneMode{
     -fx-background-color: #eee;
     
+}
+
+.paneFondoImagen {
+    -fx-Background-image: url(../img/imagenNubes.png);
+    -fx-background-size: 100% ;
+}
+
+.paneFondoImagenSplit1 {
+    -fx-Background-image: url(../img/imagenNubes.png);
+    -fx-background-size: 210%;
+}
+
+.paneFondoImagenSplit2 {
+    -fx-Background-image: url(../img/imagenNubes.png);
+    -fx-background-size: 150%;
 }

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="464.0" minWidth="865.0" onKeyReleased="#AtajosVista" prefHeight="488.0" prefWidth="1057.0" stylesheets="@../resource/MenuPrincipalStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.moduloFacturacion.controller.MenuPrincipalContoller">
+   <children>
+      <TabPane layoutY="26.0" prefHeight="375.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+        <tabs>
+          <Tab onSelectionChanged="#tabBienvenida" styleClass="tabItem">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" onKeyReleased="#AtajosInicio" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="paneBienvenida" layoutX="28.0" layoutY="14.0" prefHeight="102.0" prefWidth="506.0" styleClass="paneBienvenida" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="17.800000000000068" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <Label fx:id="labelUsuario" layoutX="14.0" layoutY="4.0" text="¡BIENVENIDO USUARIO!" wrapText="true">
+                                 <font>
+                                    <Font name="Arial Bold Italic" size="28.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutY="39.0" prefHeight="78.0" prefWidth="880.0" styleClass="panelBienvenida1" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="39.0" />
+                        <GridPane layoutX="18.0" layoutY="131.0" prefHeight="253.0" prefWidth="775.0" AnchorPane.bottomAnchor="55.400000000000006" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="131.00000000000003">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="124.00000610351563" minHeight="10.0" prefHeight="119.19998779296876" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="139.2" minHeight="10.0" prefHeight="134.40001220703124" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane fx:id="cajaClientes" onMouseClicked="#ClientesAtajo" prefHeight="200.0" prefWidth="200.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets right="15.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="126.0" prefWidth="243.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <opaqueInsets>
+                                          <Insets top="5.0" />
+                                       </opaqueInsets>
+                                       <children>
+                                          <Pane prefHeight="100.0" prefWidth="99.0">
+                                             <children>
+                                                <ImageView fitHeight="66.0" fitWidth="97.0" layoutX="1.0" layoutY="19.0" pickOnBounds="true">
+                                                   <image>
+                                                      <Image url="@../img/cliente.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="3.0" layoutY="85.0" prefHeight="17.0" prefWidth="95.0" text="CLIENTES" textAlignment="CENTER" textFill="#0e0404">
+                                                   <font>
+                                                      <Font name="Arial Bold Italic" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="paneBienvenida" />
+                                    <String fx:value="opciones" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <AnchorPane fx:id="cajaInventario" onMouseClicked="#inventarioAtajo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets left="7.0" />
+                                 </GridPane.margin>
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <opaqueInsets>
+                                          <Insets top="5.0" />
+                                       </opaqueInsets>
+                                       <children>
+                                          <Pane prefHeight="100.0" prefWidth="124.0">
+                                             <children>
+                                                <ImageView fitHeight="66.0" fitWidth="97.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true">
+                                                   <image>
+                                                      <Image url="@../img/moto.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="2.0" layoutY="84.0" prefHeight="22.0" prefWidth="121.0" text="MENSAJERO" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Arial Bold Italic" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="paneBienvenida" />
+                                    <String fx:value="opciones" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <AnchorPane fx:id="cajaFactura" onMouseClicked="#facturaAtajo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <opaqueInsets>
+                                          <Insets top="5.0" />
+                                       </opaqueInsets>
+                                       <children>
+                                          <Pane prefHeight="100.0" prefWidth="124.0">
+                                             <children>
+                                                <ImageView fitHeight="66.0" fitWidth="97.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true">
+                                                   <image>
+                                                      <Image url="@../img/factura.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="7.0" layoutY="86.0" prefHeight="22.0" prefWidth="110.0" text="REPORTES" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Arial Bold Italic" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="paneBienvenida" />
+                                    <String fx:value="opciones" />
+                                 </styleClass>
+                                 <GridPane.margin>
+                                    <Insets left="6.0" top="10.0" />
+                                 </GridPane.margin>
+                              </AnchorPane>
+                              <AnchorPane fx:id="cajaConsulta" onMouseClicked="#consultaPrecios" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="126.0" prefWidth="243.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <opaqueInsets>
+                                          <Insets top="5.0" />
+                                       </opaqueInsets>
+                                       <children>
+                                          <Pane prefHeight="125.0" prefWidth="147.0">
+                                             <children>
+                                                <ImageView fitHeight="66.0" fitWidth="97.0" layoutX="25.0" layoutY="19.0" pickOnBounds="true">
+                                                   <image>
+                                                      <Image url="@../img/productoVerde.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="29.0" layoutY="85.0" prefHeight="22.0" prefWidth="90.0" text="PEDIDOS" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Arial Bold Italic" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="paneBienvenida" />
+                                    <String fx:value="opciones" />
+                                 </styleClass>
+                                 <GridPane.margin>
+                                    <Insets right="15.0" top="10.0" />
+                                 </GridPane.margin>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                        <Pane nodeOrientation="RIGHT_TO_LEFT" prefHeight="112.0" prefWidth="170.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <ImageView fitHeight="106.0" fitWidth="169.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../img/persona.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                     <styleClass>
+                        <String fx:value="anchorFondo" />
+                        <String fx:value="paneFondoImagen" />
+                     </styleClass></AnchorPane>
+            </content>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/usuarioBlanco.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Menu de Inicio" />
+               </tooltip>
+          </Tab>
+          <Tab fx:id="tabAjustes" onSelectionChanged="#tabAjustesEvent" styleClass="tabItem">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" onKeyReleased="#AtajosConfiguracion" prefHeight="180.0" prefWidth="200.0" styleClass="paneFondoImagen">
+                     <children>
+                        <SplitPane dividerPositions="0.2992491670598523" prefHeight="374.0" prefWidth="547.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="0.0" styleClass="paneFondoImagenSplit1">
+                                 <children>
+                                    <VBox alignment="CENTER" layoutY="7.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane fx:id="paneUsuario" prefHeight="410.0" prefWidth="291.0">
+                                             <children>
+                                                <HBox alignment="CENTER" layoutY="1.0" prefHeight="26.0" prefWidth="195.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                   <children>
+                                                      <Label text="AGREGAR USUARIO" textFill="#f7f7f7">
+                                                         <font>
+                                                            <Font name="Arial Black" size="15.0" />
+                                                         </font></Label>
+                                                   </children>
+                                                </HBox>
+                                                <Label layoutX="14.0" layoutY="43.0" prefHeight="17.0" prefWidth="52.0" text="NOMBRE" textFill="WHITE" AnchorPane.leftAnchor="14.0">
+                                                   <font>
+                                                      <Font name="System Italic" size="12.0" />
+                                                   </font></Label>
+                                                <JFXTextField fx:id="txtNombreUsuario" layoutX="15.0" layoutY="52.0" onKeyTyped="#validarUsuario" prefHeight="26.0" prefWidth="163.0" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="17.0" />
+                                                <Label layoutX="11.0" layoutY="226.0" text="PASSWORD" textFill="#c8c8c8" AnchorPane.leftAnchor="11.0">
+                                                   <font>
+                                                      <Font name="System Italic" size="12.0" />
+                                                   </font></Label>
+                                                <JFXPasswordField fx:id="txtPasswordUsuario" layoutX="15.0" layoutY="235.0" onKeyTyped="#validarcontraseña" prefHeight="26.0" prefWidth="240.0" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="17.0" />
+                                                <Label layoutX="13.0" layoutY="278.0" text="TIPO USUARIO" textFill="#cbcbcb" AnchorPane.leftAnchor="13.0">
+                                                   <font>
+                                                      <Font name="System Italic" size="12.0" />
+                                                   </font></Label>
+                                                <ComboBox fx:id="cmbTipoUsuario" layoutX="14.0" layoutY="296.0" prefHeight="28.0" prefWidth="262.0" styleClass="combo" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="296.0" />
+                                                <JFXButton fx:id="btnEditar" buttonType="RAISED" layoutX="205.0" layoutY="368.0" onMouseClicked="#btnEditar" prefHeight="26.0" prefWidth="78.0" styleClass="boton" text="EDITAR" textFill="WHITE" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="368.0" />
+                                                <JFXButton fx:id="btnEliminar" buttonType="RAISED" layoutX="105.0" layoutY="368.0" onMouseClicked="#btnEliminar" prefHeight="26.0" prefWidth="94.0" styleClass="boton" text="ELIMINAR" textFill="WHITE" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="368.0" />
+                                                <JFXButton fx:id="btnAgregar" buttonType="RAISED" layoutX="7.0" layoutY="368.0" onMouseClicked="#btnAgregar" prefHeight="26.0" prefWidth="90.0" styleClass="boton" text="AGREGAR" textFill="WHITE" AnchorPane.bottomAnchor="15.127259440777173" AnchorPane.rightAnchor="198.96362922101008" AnchorPane.topAnchor="368.0" />
+                                                <Label layoutX="15.0" layoutY="168.0" text="USUARIO" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Italic" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txtUserName" layoutX="15.0" layoutY="177.0" onKeyTyped="#validarUsuario" prefHeight="27.0" prefWidth="257.0" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="17.0" />
+                                                <Label layoutX="14.0" layoutY="109.0" text="APELLIDO">
+                                                   <font>
+                                                      <Font name="System Italic" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txtApellidoUsuario" layoutX="15.0" layoutY="118.0" onKeyTyped="#validarUsuario" prefHeight="27.0" prefWidth="263.0" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="17.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane fx:id="paneTabla" minHeight="0.0" minWidth="0.0" prefHeight="442.0" prefWidth="577.0" styleClass="paneFondoImagenSplit2">
+                                 <children>
+                                    <TableView fx:id="tblUsuario" layoutX="18.0" layoutY="66.0" onMouseClicked="#seleccionarElementos" prefHeight="281.0" prefWidth="476.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="73.0">
+                                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                                      <columns>
+                                        <TableColumn fx:id="colCodigoUsuario" prefWidth="75.0" text="CÓDIGO" />
+                                          <TableColumn fx:id="colNombreUsuario" prefWidth="75.0" text="NOMBRE" />
+                                          <TableColumn fx:id="colApellidoUsuario" prefWidth="75.0" text="APELLIDO" />
+                                          <TableColumn fx:id="colUsername" prefWidth="81.60000610351562" text="USUARIO" />
+                                          <TableColumn fx:id="colPasswordUsuario" prefWidth="81.60000610351562" text="PASSWORD" />
+                                          <TableColumn fx:id="colTipoUsuario" prefWidth="75.0" text="TIPO USUARIO" />
+                                      </columns>
+                                    </TableView>
+                                    <Label layoutX="16.0" layoutY="14.0" text="USUARIO" textFill="WHITE" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="14.0">
+                                       <font>
+                                          <Font name="System Italic" size="14.0" />
+                                       </font></Label>
+                                    <GridPane layoutX="16.0" layoutY="30.0" prefHeight="26.0" prefWidth="446.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="36.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="228.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.60003662109375" minWidth="10.0" prefWidth="84.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <ComboBox fx:id="cmbUserName" editable="true" prefHeight="26.0" prefWidth="245.0" styleClass="comboOscuro" />
+                                          <JFXButton fx:id="btnBuscar" buttonType="RAISED" onMouseClicked="#btnBuscar" prefHeight="26.0" prefWidth="83.0" styleClass="boton" text="BUSCAR" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                             <GridPane.margin>
+                                                <Insets left="15.0" />
+                                             </GridPane.margin>
+                                          </JFXButton>
+                                       </children>
+                                    </GridPane>
+                                    <CheckBox fx:id="checkBox" layoutX="21.0" layoutY="354.0" mnemonicParsing="false" onAction="#recordarContraseña" prefHeight="26.0" prefWidth="258.0" styleClass="check" text="RECORDAR CONTRASEÑA" textFill="#f4f4f4" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="21.0" />
+                                    <Label layoutX="21.0" layoutY="386.0" prefHeight="18.0" prefWidth="383.0" text="ADVERTENCIA: SI USTED ES ADMINISTRADOR " textFill="WHITE" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="21.0" />
+                                    <Label layoutX="21.0" layoutY="406.0" prefHeight="18.0" prefWidth="322.0" text="NO ES SEGURO QUE LO RECUERDE" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="21.0" />
+                                 </children></AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+            </content>
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/ajustesBlanco.png" />
+                     </image></ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Configuración y Usuarios" />
+               </tooltip>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <MenuBar layoutX="-1.0" layoutY="-5.0" prefHeight="26.0" prefWidth="289.0" styleClass="menubar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu id="menuItem" mnemonicParsing="false" text="Modulos">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#facturasView" text="Clientes" />
+                  <MenuItem mnemonicParsing="false" onAction="#productosView" text="Usuarios" />
+                  <MenuItem fx:id="itemInventario" mnemonicParsing="false" onAction="#inventarioView" text="Pedidos" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Reportes">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#cierreCaja" text="Reportes Pedidos" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
