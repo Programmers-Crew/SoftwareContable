@@ -13,12 +13,11 @@ public class Clientes {
     }
 
     public Clientes(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena) {
-        this.usuarioId = usuarioId;
+       this.usuarioId = usuarioId;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
         this.userName = userName;
-        this.usuarioContrasena = usuarioContrasena;
-    }
+        this.usuarioContrasena = usuarioContrasena;    }
 
     public int getUsuarioId() {
         return usuarioId;

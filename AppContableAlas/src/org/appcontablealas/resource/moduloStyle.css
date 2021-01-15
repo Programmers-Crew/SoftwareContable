@@ -9,6 +9,7 @@
     -fx-background-size: stretch;
 }
 
+
 .bar {
     -fx-background-color: black;
 }
@@ -160,7 +161,8 @@
 }
 
 .paneFondoImagen {
-    -fx-Background-image: url(../img/imagenFondo.png);
+    -fx-Background-image: url(../img/imagenNubes.png);
+    -fx-background-size: 100%;
 }
 
 .paneFondoImagenSplit1 {

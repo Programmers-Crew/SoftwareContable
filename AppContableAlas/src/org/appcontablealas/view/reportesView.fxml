@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="466.0" prefWidth="865.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.moduloFacturacion.controller.InventarioViewController">
+<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="466.0" prefWidth="865.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.ReportesViewController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="36.0" prefWidth="600.0" styleClass="bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -31,12 +31,12 @@
                   <Reflection />
                </effect>
             </Pane>
-            <Pane fx:id="btnProveedores" layoutX="59.0" layoutY="4.0" onMouseClicked="#btnProveedores" prefHeight="27.0" prefWidth="46.0" styleClass="panePedidos">
+            <Pane fx:id="btnPedidos" layoutX="59.0" layoutY="4.0" onMouseClicked="#btnProveedores" prefHeight="27.0" prefWidth="46.0" styleClass="panePedidos">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Pane>
-            <Pane fx:id="btnProductos" layoutX="105.0" layoutY="4.0" onMouseClicked="#btnProductos" prefHeight="27.0" prefWidth="46.0" styleClass="paneReporte">
+            <Pane fx:id="btnProductos" layoutX="105.0" layoutY="4.0" onMouseClicked="#btnProductos" prefHeight="27.0" prefWidth="46.0" styleClass="paneCliente">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
