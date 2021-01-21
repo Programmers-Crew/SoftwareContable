@@ -3,18 +3,21 @@ package org.appcontablealas.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,8 +28,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.appcontablealas.bean.Animations;
 import org.appcontablealas.bean.AutoCompleteComboBoxListener;
 import org.appcontablealas.bean.CambioScene;
 import org.appcontablealas.bean.Clientes;
@@ -34,30 +37,31 @@ import org.appcontablealas.db.Conexion;
 import org.controlsfx.control.Notifications;
 
 
+
 public class ClientesViewController implements Initializable {
 
+     public enum Operacion{AGREGAR,GUARDAR,ELIMINAR,BUSCAR,ACTUALIZAR,CANCELAR,NINGUNO};
+    public Operacion tipoOperacion= Operacion.NINGUNO;
+    public Operacion cancelar = Operacion.NINGUNO;
+    
     CambioScene cambioScene = new CambioScene();
     ObservableList<Clientes> listaClientes;
     ObservableList<String> listaUsernameClientes;
+    ObservableList<String> listaCorreos;
+
     
     Image imgError = new Image("org/appcontablealas/img/error.png");
     Image imgCorrecto= new Image("org/appcontablealas/img/correcto.png");
     
     MenuPrincipalContoller menu = new MenuPrincipalContoller();
     
+    
+    @FXML
+    private AnchorPane anchor;
     @FXML
     private Pane btnRegresar;
     @FXML
     private Pane btnInicio;
-
-    public enum Operacion{AGREGAR,GUARDAR,ELIMINAR,BUSCAR,ACTUALIZAR,CANCELAR,NINGUNO};
-    public Operacion tipoOperacionProveedores= Operacion.NINGUNO;
-    public Operacion cancelar = Operacion.NINGUNO;
-    
-    Animations animacion = new Animations();
-    
-    @FXML
-    private AnchorPane anchor;
     @FXML
     private Pane btnPedidos;
     @FXML
@@ -72,6 +76,8 @@ public class ClientesViewController implements Initializable {
     private JFXTextField txtUserNameCliente;
     @FXML
     private JFXTextField txtApellidoCliente;
+    @FXML
+    private JFXTextField txtCorreoCliente;
     @FXML
     private JFXButton btnAgregar;
     @FXML
@@ -93,9 +99,14 @@ public class ClientesViewController implements Initializable {
     @FXML
     private TableColumn<Clientes, String> colPasswordCliente;
     @FXML
+    private TableColumn<Clientes, String> colCorreoCliente;
+    @FXML
     private JFXButton btnBuscar;
     @FXML
     private ComboBox<String> cmbUsuarioCliente;
+
+
+
 
 
     public void limpiarText(){
@@ -103,6 +114,7 @@ public class ClientesViewController implements Initializable {
         txtApellidoCliente.setText("");
         txtUserNameCliente.setText("");
         txtPasswordCliente.setText("");
+        txtCorreoCliente.setText("");
     }
     
     public void desactivarText(){
@@ -110,6 +122,7 @@ public class ClientesViewController implements Initializable {
         txtApellidoCliente.setEditable(false);
         txtUserNameCliente.setEditable(false);
         txtPasswordCliente.setEditable(false);
+        txtCorreoCliente.setEditable(false);
     }
     
     public void activarText(){
@@ -117,6 +130,7 @@ public class ClientesViewController implements Initializable {
         txtApellidoCliente.setEditable(true);
         txtUserNameCliente.setEditable(true);
         txtPasswordCliente.setEditable(true);
+        txtCorreoCliente.setEditable(true);
     }
     
     public void desactivarControles(){
@@ -129,17 +143,10 @@ public class ClientesViewController implements Initializable {
         btnEditar.setDisable(false);
     }
     
-    
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
-    
+   
    public ObservableList<Clientes> getClientes(){
         ArrayList<Clientes> listaCliente = new ArrayList();
-        ArrayList<String> listaUsernameCliente = new ArrayList();
+        ArrayList<String> listaUsername = new ArrayList();
         String sql = "{call Sp_ListarClientes()}";
         int x=0;
         try {
@@ -148,15 +155,16 @@ public class ClientesViewController implements Initializable {
             while(rs.next()){
                 listaCliente.add(new Clientes(
                         rs.getInt("usuarioId"),
-                        rs.getString("userName"),
                         rs.getString("usuarioNombre"),
                         rs.getString("usuarioApellido"),
-                        rs.getString("usuarioContrasena")
+                        rs.getString("userName"),
+                        rs.getString("usuarioContrasena"),
+                        rs.getString("usuarioCorreo")
                 ));
-              listaUsernameCliente.add(x,rs.getString("userName"));
+              listaUsername.add(x,rs.getString("userName"));
               x++;
             }
-            listaUsernameClientes = FXCollections.observableList(listaUsernameCliente);
+            listaUsernameClientes = FXCollections.observableList(listaUsername);
             cmbUsuarioCliente.setItems(listaUsernameClientes);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -170,11 +178,10 @@ public class ClientesViewController implements Initializable {
             noti.darkStyle();
             noti.show();
         }
-        
         return listaClientes = FXCollections.observableList(listaCliente);
     }
    
-       public void cargarDatos(){
+       public void cargarDatos(){        
         tblCliente.setItems(getClientes());
         
             colCodigoCliente.setCellValueFactory(new PropertyValueFactory("usuarioId"));
@@ -182,11 +189,380 @@ public class ClientesViewController implements Initializable {
             colApellidoCliente.setCellValueFactory(new PropertyValueFactory("usuarioApellido"));
             colUsuarioCliente.setCellValueFactory(new PropertyValueFactory("userName"));
             colPasswordCliente.setCellValueFactory(new PropertyValueFactory("usuarioContrasena"));
-
+            colCorreoCliente.setCellValueFactory(new PropertyValueFactory("usuarioCorreo"));
             new AutoCompleteComboBoxListener<>(cmbUsuarioCliente);
-            desactivarControles();
             desactivarText();
             limpiarText();
     }
+
+    @FXML
+    private void seleccionarElementos(MouseEvent event) {
+        int index = tblCliente.getSelectionModel().getSelectedIndex();
+        try{
+            activarText();
+            txtNombreCliente.setText(colNombreCliente.getCellData(index));
+            txtApellidoCliente.setText(colApellidoCliente.getCellData(index));
+            txtUserNameCliente.setText(colUsuarioCliente.getCellData(index));
+            txtPasswordCliente.setText(colPasswordCliente.getCellData(index));
+            txtCorreoCliente.setText(colCorreoCliente.getCellData(index));
+            activarControles();
+            
+        }catch(Exception e){
+           e.printStackTrace();
+        }
+    }   
+
+    public void accion(){
+        switch(tipoOperacion){
+            case AGREGAR:
+                tipoOperacion = Operacion.GUARDAR;
+                cancelar = Operacion.CANCELAR;
+                desactivarControles();
+                btnAgregar.setText("GUARDAR");
+                btnEliminar.setText("CANCELAR");
+                btnEliminar.setDisable(false);
+                activarText();
+                btnBuscar.setDisable(true);
+                limpiarText();
+                break;
+            case CANCELAR:
+                tipoOperacion = Operacion.NINGUNO;
+                desactivarControles();
+                desactivarText();
+                btnAgregar.setText("AGREGAR");
+                btnEliminar.setText("ELIMINAR");
+                limpiarText();
+                btnBuscar.setDisable(false);
+                cancelar = Operacion.NINGUNO;
+                break;
+        }
+    }
+    
+    
+    public void accion(String sql){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        PreparedStatement ps;
+        ResultSet rs;
+        Notifications noti = Notifications.create();
+        ButtonType buttonTypeSi = new ButtonType("Si");
+        ButtonType buttonTypeNo = new ButtonType("No");
+        switch(tipoOperacion){
+            case GUARDAR: 
+                alert.setTitle("AGREGAR REGISTRO");
+                alert.setHeaderText("AGREGAR REGISTRO");
+                alert.setContentText("¿Está seguro que desea guardar este registro?");
+                
+                alert.getButtonTypes().setAll(buttonTypeSi, buttonTypeNo);
+                
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.get() == buttonTypeSi ){
+                    try {
+                        ps = Conexion.getIntance().getConexion().prepareCall(sql);
+                        ps.execute();
+                        
+                        noti.graphic(new ImageView(imgCorrecto));
+                        noti.title("OPERACIÓN EXITOSA");
+                        noti.text("SE HA AGREGADO EXITOSAMENTE EL REGISTRO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                        cargarDatos();
+                    }catch (SQLException ex) {
+                        ex.printStackTrace();
+                        noti.graphic(new ImageView(imgError));
+                        noti.title("ERROR AL AGREGAR");
+                        noti.text("HA OCURRIDO UN ERROR AL GUARDAR EL REGISTRO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                    }
+                }else{
+                    noti.graphic(new ImageView(imgError));
+                    noti.title("OPERACIÓN CANCELADA");
+                    noti.text("NO SE HA AGREGADO EL REGISTRO");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();
+                    noti.show();
+                    tipoOperacion = Operacion.CANCELAR;
+                    accion();
+                }
+                break;
+
+            case ELIMINAR:
+                alert.setTitle("ELIMINAR REGISTRO");
+                alert.setHeaderText("ELIMINAR REGISTRO");
+                alert.setContentText("¿Está seguro que desea Eliminar este registro?");
+               
+                alert.getButtonTypes().setAll(buttonTypeSi, buttonTypeNo);
+                
+                Optional<ButtonType> resultEliminar = alert.showAndWait();
+                
+                if(resultEliminar.get() == buttonTypeSi){
+                    try {
+                        ps = Conexion.getIntance().getConexion().prepareCall(sql);
+                        ps.execute();
+                        
+                        noti.graphic(new ImageView(imgCorrecto));
+                        noti.title("OPERACIÓN EXITOSA");
+                        noti.text("SE HA ELIMINADO EXITOSAMENTE EL REGISTRO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        cargarDatos();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                    }catch (SQLException ex) {
+                        ex.printStackTrace();
+                        noti.graphic(new ImageView(imgError));
+                        noti.title("ERROR AL ELIMINAR");
+                        noti.text("HA OCURRIDO UN ERROR AL ELIMINAR EL REGISTRO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                    }
+                }else{
+                     noti.graphic(new ImageView(imgError));
+                    noti.title("OPERACIÓN CANCELADA");
+                    noti.text("NO SE HA ELIMINADO EL REGISTRO");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();
+                    noti.show();
+                    tipoOperacion = Operacion.CANCELAR;
+                    accion();
+                }
+                break;
+                
+            case ACTUALIZAR:
+                alert.setTitle("ACTUALIZAR REGISTRO");
+                alert.setHeaderText("ACTUALIZAR REGISTRO");
+                alert.setContentText("¿Está seguro que desea Actualizar este registro?");
+                alert.getButtonTypes().setAll(buttonTypeSi, buttonTypeNo);
+                
+                Optional<ButtonType> resultactualizar = alert.showAndWait();
+                if(resultactualizar.get() == buttonTypeSi ){
+                    try {
+                        ps = Conexion.getIntance().getConexion().prepareCall(sql);
+                        ps.execute();
+                        
+                        noti.graphic(new ImageView(imgCorrecto));
+                        noti.title("OPERACIÓN EXITOSA");
+                        noti.text("SE HA ACTUALIZADO EXITOSAMENTE EL REGISTRO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                        cargarDatos();
+                    }catch (SQLException ex) {
+                        ex.printStackTrace();
+                        noti.graphic(new ImageView(imgError));
+                        noti.title("ERROR AL ACTUALIZAR");
+                        noti.text("HA OCURRIDO UN ERROR AL ACTUALIZAR EL REGISTRO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                    }
+                }else{
+                    
+                    noti.graphic(new ImageView(imgError));
+                    noti.title("OPERACIÓN CANCELADA");
+                    noti.text("NO SE HA ACTUALIZAR EL REGISTRO");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();
+                    noti.show();
+                    tipoOperacion = Operacion.CANCELAR;
+                    accion();
+                }
+                break;
+                
+            case BUSCAR:
+                try{
+                    ps = Conexion.getIntance().getConexion().prepareCall(sql);
+                    rs = ps.executeQuery();
+                    int codigo=0;
+                    while(rs.next()){
+                        txtNombreCliente.setText(rs.getString("usuarioNombre"));
+                        txtApellidoCliente.setText(rs.getString("usuarioApellido"));
+                        txtUserNameCliente.setText(rs.getString("userName"));
+                        txtPasswordCliente.setText(rs.getString("usuarioContrasena"));
+                        txtCorreoCliente.setText(rs.getString("usuarioCorreo"));
+                        codigo = rs.getInt("usuarioId");
+                    }                    
+                    if(rs.first()){
+                        for(int i=0; i<tblCliente.getItems().size(); i++){
+                            if(colCodigoCliente.getCellData(i) == codigo){
+                                tblCliente.getSelectionModel().select(i);
+                                break;
+                            }
+                        }
+                        noti.graphic(new ImageView(imgCorrecto));
+                        noti.title("OPERACIÓN EXITOSA");
+                        noti.text("SU OPERACIÓN SE HA REALIZADO CON EXITO");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        activarControles();
+                    }else{
+                        noti.graphic(new ImageView(imgError));
+                        noti.title("ERROR AL BUSCAR");
+                        noti.text("NO SE HA ENCONTRADO EN LA BASE DE DATOS");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                        accion();
+                    }
+                }catch(SQLException ex){
+                    ex.printStackTrace();
+                    noti.graphic(new ImageView(imgError));
+                    noti.title("ERROR AL BUSCAR");
+                    noti.text("HA OCURRIDO UN ERROR EN LA BASE DE DATOS");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();
+                    noti.show();
+                    tipoOperacion = Operacion.CANCELAR;
+                    accion();
+                }
+                break;
+        }
+    }
+    
+        public void buscar(){
+            if(cmbUsuarioCliente.getValue().equals("")){
+                    Notifications noti = Notifications.create();
+                    noti.graphic(new ImageView(imgError));
+                    noti.title("ERROR");
+                    noti.text("El CAMPO DE CÓDIGO ESTA VACÍO");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();   
+                    noti.show();
+                }else{
+                    tipoOperacion = Operacion.BUSCAR;
+                    String sql = "{call Sp_BuscarMensajero('"+cmbUsuarioCliente.getValue()+"')}";
+                    accion(sql);
+                }
+            }
+    
+    
+    @FXML
+    private void btnBuscar(MouseEvent event) {
+      buscar();
+    }
+    
+        @FXML
+    private void btnEliminar(MouseEvent event) {    
+        if(tipoOperacion == Operacion.GUARDAR){
+            tipoOperacion = Operacion.CANCELAR;
+            accion();
+            }else{
+                String sql = "{call Sp_EliminarUsuarioPorNombre('"+txtUserNameCliente.getText()+"')}";
+                tipoOperacion = Operacion.ELIMINAR;
+                accion(sql);
+            }
+        }
+    
+    
+        @FXML
+    private void btnAgregar(MouseEvent event) {
+             if(tipoOperacion == Operacion.GUARDAR){
+                if(txtNombreCliente.getText().isEmpty() || txtPasswordCliente.getText().isEmpty() || txtCorreoCliente.getText().isEmpty() || txtUserNameCliente.getText().isEmpty() || txtApellidoCliente.getText().isEmpty()){
+                    Notifications noti = Notifications.create();
+                    noti.graphic(new ImageView(imgError));
+                    noti.title("ERROR");
+                    noti.text("HAY CAMPOS VACÍOS");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();   
+                    noti.show();
+                    
+                }else{
+                    if((txtUserNameCliente.getText().length() < 25 ) && (txtUserNameCliente.getText().length() < 25)){
+                        int tipoUsuario = 3;
+                        Clientes nuevoClientes = new Clientes();
+                        nuevoClientes.setUsuarioNombre(txtNombreCliente.getText());
+                        nuevoClientes.setUsuarioApellido(txtPasswordCliente.getText());
+                        nuevoClientes.setUserName(txtUserNameCliente.getText());
+                        nuevoClientes.setUsuarioContrasena(txtApellidoCliente.getText());
+                        nuevoClientes.setUsuarioCorreo(txtCorreoCliente.getText());
+                        
+
+                        String sql = "{call Sp_AgregarUsuario('"+nuevoClientes.getUsuarioNombre()+"','"+nuevoClientes.getUsuarioApellido()+"','"+nuevoClientes.getUserName()+"','"+nuevoClientes.getUsuarioContrasena()+"','"+nuevoClientes.getUsuarioCorreo()+"','"+tipoUsuario+"')}";
+                        accion(sql);
+                        String correo = "";
+                        
+                        System.out.println(correo + txtCorreoCliente + colCorreoCliente);
+                    }else{
+                        Notifications noti = Notifications.create();
+                        noti.graphic(new ImageView(imgError));
+                        noti.title("ERROR");
+                        noti.text("USUARIO Y/O CONTRASEÑA NO TIENEN UNA LONGITUD ADECUADA (DEBE CONTENER MENOS DE 30 CARACTERES)");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();   
+                        noti.show();
+                            }
+                }
+                    
+            }else{
+                tipoOperacion = Operacion.AGREGAR;
+                accion();
+            }             
+    }
+    
+        
+    @FXML
+    private void btnEditar(MouseEvent event) {
+         int index = tblCliente.getSelectionModel().getSelectedIndex();
+        int codigoBuscado = 0;
+        
+        codigoBuscado = colCodigoCliente.getCellData(index);
+        
+        System.out.println(codigoBuscado);
+        
+        Clientes nuevoClientes = new Clientes();
+        nuevoClientes.setUsuarioNombre(txtNombreCliente.getText());
+        nuevoClientes.setUsuarioApellido(txtPasswordCliente.getText());
+        nuevoClientes.setUserName(txtUserNameCliente.getText());
+        nuevoClientes.setUsuarioContrasena(txtApellidoCliente.getText());
+        nuevoClientes.setUsuarioCorreo(txtCorreoCliente.getText());
+
+        tipoOperacion = Operacion.ACTUALIZAR;
+        String sql = "{call Sp_ActualizarUsuario('"+codigoBuscado+"','"+nuevoClientes.getUsuarioNombre()+"','"+nuevoClientes.getUsuarioApellido()+"','"+nuevoClientes.getUserName()+"','"+nuevoClientes.getUsuarioContrasena()+"','"+nuevoClientes.getUsuarioCorreo()+"')}";
+        accion(sql);
+}
+    
+           @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(menu.prefsRegresarProductos.get("regresarProducto", "root"));
+        if(menu.prefsRegresarProductos.get("regresarProducto", "root").equals("menu")){
+            btnRegresar.setVisible(false);
+        }else{
+            btnRegresar.setVisible(true);
+            btnInicio.setVisible(false);
+        }
+        cargarDatos();
+    }    
+    
     
 }

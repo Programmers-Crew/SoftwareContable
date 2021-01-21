@@ -55,7 +55,7 @@
                               <RowConstraints maxHeight="139.2" minHeight="10.0" prefHeight="134.40001220703124" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <AnchorPane fx:id="cajaClientes" prefHeight="200.0" prefWidth="200.0">
+                              <AnchorPane fx:id="cajaClientes" onMouseClicked="#ClientesAtajo" prefHeight="200.0" prefWidth="200.0">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -125,7 +125,7 @@
                                     <String fx:value="opciones" />
                                  </styleClass>
                               </AnchorPane>
-                              <AnchorPane fx:id="cajaReportes" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <AnchorPane fx:id="cajaReportes" onMouseClicked="#reportesAtajo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -160,7 +160,7 @@
                                     <Insets left="6.0" top="10.0" />
                                  </GridPane.margin>
                               </AnchorPane>
-                              <AnchorPane fx:id="cajaPedidos" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                              <AnchorPane fx:id="cajaPedidos" onMouseClicked="#pedidosAtajo" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

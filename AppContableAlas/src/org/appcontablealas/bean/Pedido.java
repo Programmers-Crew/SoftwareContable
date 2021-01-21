@@ -7,8 +7,10 @@ public class Pedido {
     
     private int pedidoId;
     private Date pedidoFecha;
-    private String pedidoDireccion;
+    private String pedidoDireccionInicio;
+    private String pedidoDireccionFinal;
     private String cliente;
+    private String nombreReceptor;
     private String pedidoTelefonoReceptor;
     private String  pedidoDesc;
     private String mensajero;
@@ -20,11 +22,13 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int pedidoId, Date pedidoFecha, String pedidoDireccion, String cliente, String pedidoTelefonoReceptor, String pedidoDesc, String mensajero, Double pedidoMonto, Double pedidoCosto, String formaPagoDesc, String estadoPedidoDesc) {
+    public Pedido(int pedidoId, Date pedidoFecha, String pedidoDireccionInicio, String pedidoDireccionFinal, String cliente, String nombreReceptor, String pedidoTelefonoReceptor, String pedidoDesc, String mensajero, Double pedidoMonto, Double pedidoCosto, String formaPagoDesc, String estadoPedidoDesc) {
         this.pedidoId = pedidoId;
         this.pedidoFecha = pedidoFecha;
-        this.pedidoDireccion = pedidoDireccion;
+        this.pedidoDireccionInicio = pedidoDireccionInicio;
+        this.pedidoDireccionFinal = pedidoDireccionFinal;
         this.cliente = cliente;
+        this.nombreReceptor = nombreReceptor;
         this.pedidoTelefonoReceptor = pedidoTelefonoReceptor;
         this.pedidoDesc = pedidoDesc;
         this.mensajero = mensajero;
@@ -33,7 +37,6 @@ public class Pedido {
         this.formaPagoDesc = formaPagoDesc;
         this.estadoPedidoDesc = estadoPedidoDesc;
     }
-
 
     public int getPedidoId() {
         return pedidoId;
@@ -51,12 +54,20 @@ public class Pedido {
         this.pedidoFecha = pedidoFecha;
     }
 
-    public String getPedidoDireccion() {
-        return pedidoDireccion;
+    public String getPedidoDireccionInicio() {
+        return pedidoDireccionInicio;
     }
 
-    public void setPedidoDireccion(String pedidoDireccion) {
-        this.pedidoDireccion = pedidoDireccion;
+    public void setPedidoDireccionInicio(String pedidoDireccionInicio) {
+        this.pedidoDireccionInicio = pedidoDireccionInicio;
+    }
+
+    public String getPedidoDireccionFinal() {
+        return pedidoDireccionFinal;
+    }
+
+    public void setPedidoDireccionFinal(String pedidoDireccionFinal) {
+        this.pedidoDireccionFinal = pedidoDireccionFinal;
     }
 
     public String getCliente() {
@@ -65,6 +76,14 @@ public class Pedido {
 
     public void setCliente(String cliente) {
         this.cliente = cliente;
+    }
+
+    public String getNombreReceptor() {
+        return nombreReceptor;
+    }
+
+    public void setNombreReceptor(String nombreReceptor) {
+        this.nombreReceptor = nombreReceptor;
     }
 
     public String getPedidoTelefonoReceptor() {
@@ -123,5 +142,6 @@ public class Pedido {
         this.estadoPedidoDesc = estadoPedidoDesc;
     }
 
+    
     
 }

@@ -92,11 +92,11 @@
     
 }
 
-.combo{
-    
-    -fx-background-color: transparent;
-    -fx-border-color: black;
-    -fx-border-width: 0 0 1 0;
+
+.textArea {
+    -fx-border-color: #2E2E2E;
+    -fx-border-width: 1 1 1 1;
+    -fx-text-fill: black;
 }
 
 
@@ -148,11 +148,12 @@
     -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 0, 0);
 }
 
-.combo{
-    
-    -fx-background-color: transparent;
-    -fx-border-color: black;
+.combo {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
     -fx-border-width: 0 0 1 0;
+    -fx-prompt-text-fill: white;
 }
 
 .paneFondo {
@@ -181,7 +182,54 @@
     -fx-border-width: 0 0 1 0;
 }
 
-    .textField:hover {
+    .textField:hover{
         -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 2, 2);
     }
 
+.textFieldCodigo {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+
+.textFieldCodigo:hover {
+        -fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 2, 2);
+}
+
+comboOscuro:editable .list-view {
+    -fx-background-color: #2E2E2E;
+    -fx-text-fill: white;
+}
+
+.comboOscuro:editable .list-view .list-cell {
+    -fx-background-color: #2E2E2E;
+    -fx-text-fill: white;
+}
+
+    .comboOscuro:editable .list-view .list-cell:hover {
+        -fx-background-color: #212121;
+        -fx-text-fill: white;
+    }
+
+    .comboOscuro:editable .list-view .list-cell:selected {
+        -fx-background-color: #212121;
+        -fx-text-fill: white;
+    }
+
+.comboOscuro:editable .arrow-button {
+    -fx-background-color: #2E2E2E;
+}
+
+    .comboOscuro:editable .arrow-button .arrow {
+        -fx-background-color: white;
+    }
+
+.comboOscuro:editable .text-field {
+    -fx-background-color: #2E2E2E;
+}
+
+.comboOscuro .text-input {
+    -fx-text-fill: white;
+}

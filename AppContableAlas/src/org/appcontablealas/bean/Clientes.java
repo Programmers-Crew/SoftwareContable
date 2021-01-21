@@ -8,16 +8,28 @@ public class Clientes {
     private String usuarioApellido;
     private String userName; 
     private String usuarioContrasena;
+    private String usuarioCorreo;
 
     public Clientes() {
     }
 
-    public Clientes(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena) {
-       this.usuarioId = usuarioId;
+    public Clientes(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena, String usuarioCorreo) {
+        this.usuarioId = usuarioId;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
         this.userName = userName;
-        this.usuarioContrasena = usuarioContrasena;    }
+        this.usuarioContrasena = usuarioContrasena;
+        this.usuarioCorreo = usuarioCorreo;
+    }
+
+    public String getUsuarioCorreo() {
+        return usuarioCorreo;
+    }
+
+    public void setUsuarioCorreo(String usuarioCorreo) {
+        this.usuarioCorreo = usuarioCorreo;
+    }
+
 
     public int getUsuarioId() {
         return usuarioId;

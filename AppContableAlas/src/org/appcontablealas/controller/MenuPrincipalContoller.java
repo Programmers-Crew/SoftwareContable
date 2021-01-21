@@ -64,6 +64,10 @@ public class MenuPrincipalContoller implements Initializable {
     private ObservableList<Usuario>listaUsuario;
     private ObservableList<String>listaTipoUsuario;
 
+    public Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
+    public Preferences prefsUsuario1 = Preferences.userRoot().node(this.getClass().getName());
+    public Preferences prefsRegresar = Preferences.userRoot().node(this.getClass().getName());
+    public Preferences prefsRegresarProductos = Preferences.userRoot().node(this.getClass().getName());
         
     @FXML
     private AnchorPane anchor;
@@ -124,10 +128,6 @@ public class MenuPrincipalContoller implements Initializable {
     private CheckBox checkBox;
     @FXML
     private MenuItem itemInventario;
-
-    
-    public Preferences prefsUsuario1 = Preferences.userRoot().node(this.getClass().getName());
-
     
      @FXML
     private void recordarContraseña(ActionEvent event) {
@@ -901,7 +901,7 @@ public class MenuPrincipalContoller implements Initializable {
                     noti.show();
                     
                 }else{
-                    if((txtUserName.getText().length() < 30 ) && (txtPasswordUsuario.getText().length() < 30)){
+                    if((txtUserName.getText().length() < 25 ) && (txtPasswordUsuario.getText().length() < 25)){
                         int tipoUsuario;
                         Usuario nuevoUsuario = new Usuario();
                         nuevoUsuario.setUsuarioNombre(txtNombreUsuario.getText());
