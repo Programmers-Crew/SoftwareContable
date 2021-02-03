@@ -544,7 +544,7 @@ public class MenuPrincipalContoller implements Initializable {
     
     //Reportes
     public void reportes() throws IOException{
-        String inventarioUrl = "org/appcontablealas/view/reportesView.fxml";
+        String inventarioUrl = "org/appcontablealas/view/reporteView.fxml";
         cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
     }
     
@@ -563,6 +563,19 @@ public class MenuPrincipalContoller implements Initializable {
     @FXML
     private void AtajosInicio(KeyEvent event) {
     }
+    
+    
+    //Menu
+    public void menu() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/menuPrincipal.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    @FXML
+    private void menuView(ActionEvent event) throws IOException {
+        menu();
+    }
+    
     
     //atajos de configuracion
     @FXML

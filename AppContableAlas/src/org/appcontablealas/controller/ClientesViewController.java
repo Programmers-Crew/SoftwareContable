@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -59,8 +60,6 @@ public class ClientesViewController implements Initializable {
     @FXML
     private AnchorPane anchor;
     @FXML
-    private Pane btnRegresar;
-    @FXML
     private Pane btnInicio;
     @FXML
     private Pane btnPedidos;
@@ -100,6 +99,14 @@ public class ClientesViewController implements Initializable {
     private TableColumn<Clientes, String> colPasswordCliente;
     @FXML
     private TableColumn<Clientes, String> colCorreoCliente;
+    @FXML
+    private TableColumn<Clientes, String> colEmpresaCliente;
+    @FXML
+    private TableColumn<Clientes, String> colNumeroCuentaCliente;
+    @FXML
+    private TableColumn<Clientes, String> colTipoCuentaCliente;
+    @FXML
+    private TableColumn<Clientes, String> colNombreBanco;
     @FXML
     private JFXButton btnBuscar;
     @FXML
@@ -159,7 +166,11 @@ public class ClientesViewController implements Initializable {
                         rs.getString("usuarioApellido"),
                         rs.getString("userName"),
                         rs.getString("usuarioContrasena"),
-                        rs.getString("usuarioCorreo")
+                        rs.getString("usuarioCorreo"),
+                        rs.getString("empresaDesc"),
+                        rs.getString("empresaNumeroCuenta"),
+                        rs.getString("tipoCuentaDesc"),
+                        rs.getString("bancoDesc")
                 ));
               listaUsername.add(x,rs.getString("userName"));
               x++;
@@ -190,6 +201,11 @@ public class ClientesViewController implements Initializable {
             colUsuarioCliente.setCellValueFactory(new PropertyValueFactory("userName"));
             colPasswordCliente.setCellValueFactory(new PropertyValueFactory("usuarioContrasena"));
             colCorreoCliente.setCellValueFactory(new PropertyValueFactory("usuarioCorreo"));
+            colEmpresaCliente.setCellValueFactory(new PropertyValueFactory("empresaDesc"));
+            colNumeroCuentaCliente.setCellValueFactory(new PropertyValueFactory("empresaNumeroCuenta"));
+            colTipoCuentaCliente.setCellValueFactory(new PropertyValueFactory("tipoCuentaDesc"));
+            colNombreBanco.setCellValueFactory(new PropertyValueFactory("bancoDesc"));
+            
             new AutoCompleteComboBoxListener<>(cmbUsuarioCliente);
             desactivarText();
             limpiarText();
@@ -552,15 +568,56 @@ public class ClientesViewController implements Initializable {
         accion(sql);
 }
     
+    
+   //Menu
+    public void menu() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/menuPrincipal.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    private void menuView(ActionEvent event) throws IOException {
+        menu();
+    }
+    
+    @FXML
+    private void menuAtajo(MouseEvent event) throws IOException {
+        menu();
+    }
+    
+   
+    //clientes
+    public void pedido() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/pedidosView.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    private void pedidoView(ActionEvent event) throws IOException {
+        pedido();
+    }
+           
+    @FXML
+    private void pedidoAtajo(MouseEvent event) throws IOException {
+        pedido();
+    }
+    
+    //reportes
+    public void reporte() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/reporteView.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    private void reporteView(ActionEvent event) throws IOException {
+        reporte();
+    }
+        
+    @FXML
+    private void reporteAtajo(MouseEvent event) throws IOException {
+        reporte();
+    }
+    
+    
            @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(menu.prefsRegresarProductos.get("regresarProducto", "root"));
-        if(menu.prefsRegresarProductos.get("regresarProducto", "root").equals("menu")){
-            btnRegresar.setVisible(false);
-        }else{
-            btnRegresar.setVisible(true);
-            btnInicio.setVisible(false);
-        }
         cargarDatos();
     }    
     

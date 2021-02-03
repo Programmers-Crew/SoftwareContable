@@ -9,17 +9,25 @@ public class Clientes {
     private String userName; 
     private String usuarioContrasena;
     private String usuarioCorreo;
+    private String empresaDesc;
+    private String empresaNumeroCuenta;
+    private String tipoCuentaDesc;
+    private String bancoDesc;
 
     public Clientes() {
     }
 
-    public Clientes(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena, String usuarioCorreo) {
+    public Clientes(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena, String usuarioCorreo, String empresaDesc, String empresaNumeroCuenta, String tipoCuentaDesc, String bancoDesc) {
         this.usuarioId = usuarioId;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
         this.userName = userName;
         this.usuarioContrasena = usuarioContrasena;
         this.usuarioCorreo = usuarioCorreo;
+        this.empresaDesc = empresaDesc;
+        this.empresaNumeroCuenta = empresaNumeroCuenta;
+        this.tipoCuentaDesc = tipoCuentaDesc;
+        this.bancoDesc = bancoDesc;
     }
 
     public String getUsuarioCorreo() {
@@ -71,6 +79,38 @@ public class Clientes {
         this.usuarioContrasena = usuarioContrasena;
     }
 
+    public String getEmpresaDesc() {
+        return empresaDesc;
+    }
 
+    public void setEmpresaDesc(String empresaDesc) {
+        this.empresaDesc = empresaDesc;
+    }
+
+    public String getEmpresaNumeroCuenta() {
+        return empresaNumeroCuenta;
+    }
+
+    public void setEmpresaNumeroCuenta(String empresaNumeroCuenta) {
+        this.empresaNumeroCuenta = empresaNumeroCuenta;
+    }
+
+    public String getTipoCuentaDesc() {
+        return tipoCuentaDesc;
+    }
+
+    public void setTipoCuentaDesc(String tipoCuentaDesc) {
+        this.tipoCuentaDesc = tipoCuentaDesc;
+    }
+
+    public String getBancoDesc() {
+        return bancoDesc;
+    }
+
+    public void setBancoDesc(String bancoDesc) {
+        this.bancoDesc = bancoDesc;
+    }
+
+    
     
 }

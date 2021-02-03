@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -645,8 +646,55 @@ public class PedidosViewController implements Initializable {
         menuprincipal();
     }
     
+    //Menu
+    public void menu() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/menuPrincipal.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    @FXML
+    private void menuView(ActionEvent event) throws IOException {
+        menu();
+    }
+    
+    @FXML
+    private void menuAtajo(MouseEvent event) throws IOException {
+        menu();
+    }
+    
+   
+    //clientes
+    public void cliente() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/clientesView.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    @FXML
+    private void clienteView(ActionEvent event) throws IOException {
+        menu();
+    }
+           
+    @FXML
+    private void clienteAtajo(MouseEvent event) throws IOException {
+        cliente();
+    }
+    
+    //reportes
+    public void reporte() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/reporteView.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    @FXML
+    private void reporteView(ActionEvent event) throws IOException {
+        reporte();
+    }
         
-        
+    @FXML
+    private void reporteAtajo(MouseEvent event) throws IOException {
+        reporte();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();

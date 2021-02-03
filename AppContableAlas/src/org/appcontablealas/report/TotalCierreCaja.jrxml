@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TotalCierreCaja" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ffc58c81-1d87-4f9b-84b8-f08b3d51412c">
+	<property name="ireport.zoom" value="1.0000000000000036"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call Sp_SubReporteCierreDeCaja($P!{fechaInicio},$P!{fechaFinal})]]>
+	</queryString>
+	<field name="pedidoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoFecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total a pagar" class="java.math.BigDecimal"/>
+	<field name="Total a cobrar" class="java.math.BigDecimal"/>
+	<field name="Total" class="java.math.BigDecimal"/>
+	<field name="Pedidos Total Entregados" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="22">
+			<rectangle radius="6">
+				<reportElement x="0" y="0" width="555" height="22" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="0e9d0f8d-a918-45c6-82c6-80d83401231d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="14" y="0" width="135" height="20" uuid="4123cd58-a5d5-4e71-acc3-7865d4344043"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PEDIDOS ENTREGADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="2" width="100" height="20" uuid="8ca76690-77f9-4575-aeed-df219b03c540"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL A COBRAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="2" width="100" height="20" uuid="21e7d701-5d2d-44b6-9f3f-2c7485f80351"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL A PAGAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="9e7699c7-4e4f-46fd-958c-d2ee191b8d30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<rectangle radius="6">
+				<reportElement x="0" y="3" width="555" height="22" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="30fa0fa3-ea94-4bbf-a998-eb67b90ac4b3"/>
+			</rectangle>
+			<textField>
+				<reportElement x="14" y="5" width="125" height="20" uuid="f3b1574e-5bfe-44ad-af81-5c9b807e135f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Pedidos Total Entregados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="3" width="100" height="20" uuid="0a80f7df-dfd2-40b1-af2a-23fb0848db20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total a cobrar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="5" width="100" height="20" uuid="12e59883-a1c5-49f7-8c26-40240c4fef64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total a pagar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="5" width="100" height="20" uuid="ddb0c1d4-98aa-43ca-8fb4-cc50de57e05f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

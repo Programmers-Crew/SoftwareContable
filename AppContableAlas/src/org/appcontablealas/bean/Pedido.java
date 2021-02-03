@@ -37,7 +37,7 @@ public class Pedido {
         this.formaPagoDesc = formaPagoDesc;
         this.estadoPedidoDesc = estadoPedidoDesc;
     }
-
+ 
     public int getPedidoId() {
         return pedidoId;
     }

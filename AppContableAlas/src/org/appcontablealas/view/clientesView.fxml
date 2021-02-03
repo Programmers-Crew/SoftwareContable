@@ -22,11 +22,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="466.0" prefWidth="865.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.ClientesViewController">
+<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="552.0" prefWidth="1112.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.ClientesViewController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="36.0" prefWidth="600.0" styleClass="bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane fx:id="btnRegresar" prefHeight="27.0" prefWidth="46.0" styleClass="paneInicio">
+            <Pane fx:id="btnInicio" onMouseClicked="#menuAtajo" prefHeight="27.0" prefWidth="46.0" styleClass="paneInicio">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -34,20 +34,12 @@
                   <Reflection />
                </effect>
             </Pane>
-            <Pane fx:id="btnInicio" prefHeight="27.0" prefWidth="46.0" styleClass="paneInicio">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <Reflection />
-               </effect>
-            </Pane>
-            <Pane fx:id="btnPedidos" layoutX="59.0" layoutY="4.0" prefHeight="27.0" prefWidth="46.0" styleClass="panePedidos">
+            <Pane fx:id="btnPedidos" layoutX="59.0" layoutY="4.0" onMouseClicked="#pedidoAtajo" prefHeight="27.0" prefWidth="46.0" styleClass="panePedidos">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Pane>
-            <Pane fx:id="btnReportes" layoutX="105.0" layoutY="4.0" prefHeight="27.0" prefWidth="46.0" styleClass="paneReporte">
+            <Pane fx:id="btnReportes" layoutX="105.0" layoutY="4.0" onMouseClicked="#reporteAtajo" prefHeight="27.0" prefWidth="46.0" styleClass="paneReporte">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -101,17 +93,17 @@
                                                    </font>
                                                 </Label>
                                                 <JFXTextField fx:id="txtApellidoCliente" layoutX="24.0" layoutY="144.0" prefHeight="31.0" prefWidth="204.0" styleClass="textFieldCodigo" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" />
-                                                <JFXButton fx:id="btnAgregar" buttonType="RAISED" layoutX="20.0" layoutY="383.0" onMouseClicked="#btnAgregar" prefHeight="24.0" prefWidth="65.0" styleClass="boton" text="AGREGAR" textFill="WHITE">
+                                                <JFXButton fx:id="btnAgregar" buttonType="RAISED" layoutX="59.0" layoutY="383.0" onMouseClicked="#btnAgregar" prefHeight="24.0" prefWidth="65.0" styleClass="boton" text="AGREGAR" textFill="WHITE">
                                                    <font>
                                                       <Font size="11.0" />
                                                    </font>
                                                 </JFXButton>
-                                                <JFXButton fx:id="btnEditar" buttonType="RAISED" layoutX="158.0" layoutY="383.0" onMouseClicked="#btnEditar" prefHeight="24.0" prefWidth="66.0" styleClass="boton" text="EDITAR" textFill="WHITE">
+                                                <JFXButton fx:id="btnEditar" buttonType="RAISED" layoutX="197.0" layoutY="383.0" onMouseClicked="#btnEditar" prefHeight="24.0" prefWidth="66.0" styleClass="boton" text="EDITAR" textFill="WHITE">
                                                    <font>
                                                       <Font size="11.0" />
                                                    </font>
                                                 </JFXButton>
-                                                <JFXButton fx:id="btnEliminar" buttonType="RAISED" layoutX="89.0" layoutY="383.0" onMouseClicked="#btnEliminar" prefHeight="24.0" prefWidth="65.0" styleClass="boton" text="ELIMINAR" textFill="WHITE">
+                                                <JFXButton fx:id="btnEliminar" buttonType="RAISED" layoutX="128.0" layoutY="383.0" onMouseClicked="#btnEliminar" prefHeight="24.0" prefWidth="65.0" styleClass="boton" text="ELIMINAR" textFill="WHITE">
                                                    <font>
                                                       <Font size="11.0" />
                                                    </font>
@@ -144,6 +136,10 @@
                                           <TableColumn fx:id="colUsuarioCliente" prefWidth="75.0" text="USUARIO" />
                                           <TableColumn fx:id="colPasswordCliente" prefWidth="75.0" text="PASSWORD" />
                                           <TableColumn fx:id="colCorreoCliente" prefWidth="75.0" text="CORREO" />
+                                          <TableColumn fx:id="colEmpresaCliente" prefWidth="75.0" text="EMPRESA" />
+                                          <TableColumn fx:id="colNumeroCuentaCliente" prefWidth="75.0" text="CUENTA" />
+                                          <TableColumn fx:id="colTipoCuentaCliente" prefWidth="75.0" text="TIPO" />
+                                          <TableColumn fx:id="colNombreBanco" prefWidth="75.0" text="BANCO" />
                                        </columns>
                                     </TableView>
                                     <JFXButton fx:id="btnBuscar" buttonType="RAISED" layoutX="479.0" layoutY="32.0" onMouseClicked="#btnBuscar" styleClass="boton" text="BUSCAR" textFill="WHITE" AnchorPane.rightAnchor="16.70907371836313" AnchorPane.topAnchor="32.0" />
