@@ -4,7 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +43,8 @@ import org.controlsfx.control.Notifications;
 
 
 public class ClientesViewController implements Initializable {
+
+
 
      public enum Operacion{AGREGAR,GUARDAR,ELIMINAR,BUSCAR,ACTUALIZAR,CANCELAR,NINGUNO};
     public Operacion tipoOperacion= Operacion.NINGUNO;
@@ -78,6 +83,7 @@ public class ClientesViewController implements Initializable {
     @FXML
     private JFXTextField txtCorreoCliente;
     @FXML
+    private JFXTextField txtCuentaCliente;
     private JFXButton btnAgregar;
     @FXML
     private JFXButton btnEditar;
@@ -125,11 +131,11 @@ public class ClientesViewController implements Initializable {
     }
     
     public void desactivarText(){
-        txtNombreCliente.setEditable(false);
-        txtApellidoCliente.setEditable(false);
-        txtUserNameCliente.setEditable(false);
-        txtPasswordCliente.setEditable(false);
-        txtCorreoCliente.setEditable(false);
+        txtNombreCliente.setEditable(true);
+        txtApellidoCliente.setEditable(true);
+        txtUserNameCliente.setEditable(true);
+        txtPasswordCliente.setEditable(true);
+        txtCorreoCliente.setEditable(true);
     }
     
     public void activarText(){
@@ -221,6 +227,7 @@ public class ClientesViewController implements Initializable {
             txtUserNameCliente.setText(colUsuarioCliente.getCellData(index));
             txtPasswordCliente.setText(colPasswordCliente.getCellData(index));
             txtCorreoCliente.setText(colCorreoCliente.getCellData(index));
+            txtCuentaCliente.setText(colNumeroCuentaCliente.getCellData(index)+ " , " + colTipoCuentaCliente.getCellData(index)+ " ," + colNombreBanco.getCellData(index));
             activarControles();
             
         }catch(Exception e){
@@ -419,6 +426,7 @@ public class ClientesViewController implements Initializable {
                         txtUserNameCliente.setText(rs.getString("userName"));
                         txtPasswordCliente.setText(rs.getString("usuarioContrasena"));
                         txtCorreoCliente.setText(rs.getString("usuarioCorreo"));
+                        txtCuentaCliente.setText(rs.getString("empresaNumeroCuenta") + " , "+ rs.getString("tipoCuentaDesc") + "," + rs.getString("bancoDesc") );
                         codigo = rs.getInt("usuarioId");
                     }                    
                     if(rs.first()){
@@ -498,73 +506,46 @@ public class ClientesViewController implements Initializable {
             }
         }
     
-    
-        @FXML
-    private void btnAgregar(MouseEvent event) {
-             if(tipoOperacion == Operacion.GUARDAR){
-                if(txtNombreCliente.getText().isEmpty() || txtPasswordCliente.getText().isEmpty() || txtCorreoCliente.getText().isEmpty() || txtUserNameCliente.getText().isEmpty() || txtApellidoCliente.getText().isEmpty()){
-                    Notifications noti = Notifications.create();
-                    noti.graphic(new ImageView(imgError));
-                    noti.title("ERROR");
-                    noti.text("HAY CAMPOS VACÍOS");
-                    noti.position(Pos.BOTTOM_RIGHT);
-                    noti.hideAfter(Duration.seconds(4));
-                    noti.darkStyle();   
-                    noti.show();
-                    
-                }else{
-                    if((txtUserNameCliente.getText().length() < 25 ) && (txtUserNameCliente.getText().length() < 25)){
-                        int tipoUsuario = 3;
-                        Clientes nuevoClientes = new Clientes();
-                        nuevoClientes.setUsuarioNombre(txtNombreCliente.getText());
-                        nuevoClientes.setUsuarioApellido(txtPasswordCliente.getText());
-                        nuevoClientes.setUserName(txtUserNameCliente.getText());
-                        nuevoClientes.setUsuarioContrasena(txtApellidoCliente.getText());
-                        nuevoClientes.setUsuarioCorreo(txtCorreoCliente.getText());
-                        
-
-                        String sql = "{call Sp_AgregarUsuario('"+nuevoClientes.getUsuarioNombre()+"','"+nuevoClientes.getUsuarioApellido()+"','"+nuevoClientes.getUserName()+"','"+nuevoClientes.getUsuarioContrasena()+"','"+nuevoClientes.getUsuarioCorreo()+"','"+tipoUsuario+"')}";
-                        accion(sql);
-                        String correo = "";
-                        
-                        System.out.println(correo + txtCorreoCliente + colCorreoCliente);
-                    }else{
-                        Notifications noti = Notifications.create();
-                        noti.graphic(new ImageView(imgError));
-                        noti.title("ERROR");
-                        noti.text("USUARIO Y/O CONTRASEÑA NO TIENEN UNA LONGITUD ADECUADA (DEBE CONTENER MENOS DE 30 CARACTERES)");
-                        noti.position(Pos.BOTTOM_RIGHT);
-                        noti.hideAfter(Duration.seconds(4));
-                        noti.darkStyle();   
-                        noti.show();
-                            }
+    public static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
                 }
-                    
-            }else{
-                tipoOperacion = Operacion.AGREGAR;
-                accion();
-            }             
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
     }
+    }    
     
-        
+    
     @FXML
     private void btnEditar(MouseEvent event) {
          int index = tblCliente.getSelectionModel().getSelectedIndex();
         int codigoBuscado = 0;
+        String pass = "";
         
         codigoBuscado = colCodigoCliente.getCellData(index);
         
-        System.out.println(codigoBuscado);
         
         Clientes nuevoClientes = new Clientes();
         nuevoClientes.setUsuarioNombre(txtNombreCliente.getText());
-        nuevoClientes.setUsuarioApellido(txtPasswordCliente.getText());
+        
+        pass = getMD5(txtPasswordCliente.getText());
+        
+        nuevoClientes.setUsuarioApellido(txtApellidoCliente.getText());
         nuevoClientes.setUserName(txtUserNameCliente.getText());
-        nuevoClientes.setUsuarioContrasena(txtApellidoCliente.getText());
+        nuevoClientes.setUsuarioContrasena(pass);
         nuevoClientes.setUsuarioCorreo(txtCorreoCliente.getText());
+        
+        System.out.println(pass);
 
         tipoOperacion = Operacion.ACTUALIZAR;
-        String sql = "{call Sp_ActualizarUsuario('"+codigoBuscado+"','"+nuevoClientes.getUsuarioNombre()+"','"+nuevoClientes.getUsuarioApellido()+"','"+nuevoClientes.getUserName()+"','"+nuevoClientes.getUsuarioContrasena()+"','"+nuevoClientes.getUsuarioCorreo()+"')}";
+        String sql = "{call SpUpdareUserSoftware('"+codigoBuscado+"','"+nuevoClientes.getUsuarioNombre()+"','"+nuevoClientes.getUsuarioApellido()+"','"+nuevoClientes.getUserName()+"','"+nuevoClientes.getUsuarioContrasena()+"','"+nuevoClientes.getUsuarioCorreo()+"')}";
         accion(sql);
 }
     
@@ -619,6 +600,11 @@ public class ClientesViewController implements Initializable {
            @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        txtNombreCliente.setEditable(true);
+        txtApellidoCliente.setEditable(true);
+        txtUserNameCliente.setEditable(true);
+        txtPasswordCliente.setEditable(true);
+        txtCorreoCliente.setEditable(true);
     }    
     
     
