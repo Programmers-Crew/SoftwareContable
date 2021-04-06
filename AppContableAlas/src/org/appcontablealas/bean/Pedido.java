@@ -18,11 +18,12 @@ public class Pedido {
     private Double pedidoCosto;
     private String formaPagoDesc;
     private String  estadoPedidoDesc;
+    private String comentarioMensajero;
 
     public Pedido() {
     }
 
-    public Pedido(int pedidoId, Date pedidoFecha, String pedidoDireccionInicio, String pedidoDireccionFinal, String cliente, String nombreReceptor, String pedidoTelefonoReceptor, String pedidoDesc, String mensajero, Double pedidoMonto, Double pedidoCosto, String formaPagoDesc, String estadoPedidoDesc) {
+    public Pedido(int pedidoId, Date pedidoFecha, String pedidoDireccionInicio, String pedidoDireccionFinal, String cliente, String nombreReceptor, String pedidoTelefonoReceptor, String pedidoDesc, String mensajero, Double pedidoMonto, Double pedidoCosto, String formaPagoDesc, String estadoPedidoDesc, String comentarioMensajero) {
         this.pedidoId = pedidoId;
         this.pedidoFecha = pedidoFecha;
         this.pedidoDireccionInicio = pedidoDireccionInicio;
@@ -36,7 +37,10 @@ public class Pedido {
         this.pedidoCosto = pedidoCosto;
         this.formaPagoDesc = formaPagoDesc;
         this.estadoPedidoDesc = estadoPedidoDesc;
+        this.comentarioMensajero = comentarioMensajero;
     }
+
+
  
     public int getPedidoId() {
         return pedidoId;
@@ -142,6 +146,12 @@ public class Pedido {
         this.estadoPedidoDesc = estadoPedidoDesc;
     }
 
-    
+    public String getComentarioMensajero() {
+        return comentarioMensajero;
+    }
+
+    public void setComentarioMensajero(String comentarioMensajero) {
+        this.comentarioMensajero = comentarioMensajero;
+    }
     
 }

@@ -4,7 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,6 +56,7 @@ import org.controlsfx.control.Notifications;
 public class MenuPrincipalContoller implements Initializable {
 
     CambioScene cambioScene = new CambioScene();
+
     
     public enum Operacion{AGREGAR,GUARDAR,ELIMINAR,BUSCAR,ACTUALIZAR,CANCELAR,NINGUNO};
     public Operacion tipoOperacion= Operacion.NINGUNO;
@@ -103,6 +107,10 @@ public class MenuPrincipalContoller implements Initializable {
     @FXML
     private JFXPasswordField txtPasswordUsuario;
     @FXML
+    private JFXTextField txtTelefonoUsuario;
+    @FXML
+    private JFXTextField txtCorreoUsuario;
+    @FXML
     private ComboBox<String> cmbTipoUsuario;
     @FXML
     private ComboBox<String> cmbUserName;
@@ -123,13 +131,15 @@ public class MenuPrincipalContoller implements Initializable {
     @FXML
     private TableColumn<Usuario, String> colTipoUsuario;
     @FXML
-    private JFXButton btnBuscar;
+    private TableColumn<Usuario, String> colTelefonoUsuario;
     @FXML
+    private TableColumn<Usuario, String> colCorreoUsuario;
+    @FXML
+    private JFXButton btnBuscar;
     private CheckBox checkBox;
     @FXML
     private MenuItem itemInventario;
     
-     @FXML
     private void recordarContraseña(ActionEvent event) {
         if(checkBox.isSelected()){
             prefsUsuario1.put("validar", "recordar");
@@ -145,6 +155,8 @@ public class MenuPrincipalContoller implements Initializable {
         txtPasswordUsuario.setText("");
         cmbTipoUsuario.setValue("");
         cmbTipoUsuario.setPromptText("Seleccione un tipo de Usuario");
+        txtTelefonoUsuario.setText("");
+        txtCorreoUsuario.setText("");
     }
     
     public void desactivarText(){
@@ -153,6 +165,8 @@ public class MenuPrincipalContoller implements Initializable {
         txtUserName.setEditable(false);
         txtPasswordUsuario.setEditable(false);
         cmbTipoUsuario.setDisable(true);
+        txtCorreoUsuario.setEditable(false);
+        txtTelefonoUsuario.setEditable(false);
     }
     
     public void activarText(){
@@ -161,6 +175,8 @@ public class MenuPrincipalContoller implements Initializable {
         txtUserName.setEditable(true);
         txtPasswordUsuario.setEditable(true);
         cmbTipoUsuario.setDisable(false);
+        txtCorreoUsuario.setEditable(true);
+        txtTelefonoUsuario.setEditable(true);
     }
     
     public void desactivarControles(){
@@ -206,11 +222,13 @@ public class MenuPrincipalContoller implements Initializable {
             while(rs.next()){
                 lista.add(new Usuario(
                         rs.getInt("usuarioId"),
-                        rs.getString("userName"),
                         rs.getString("usuarioNombre"),
                         rs.getString("usuarioApellido"),
+                        rs.getString("userName"),
                         rs.getString("usuarioContrasena"),
-                        rs.getString("tipoUsuarioDesc")
+                        rs.getString("tipoUsuarioDesc"),
+                        rs.getString("usuarioCorreo"),
+                        rs.getString("telefono")
                 ));
               listaUsername.add(x,rs.getString("userName"));
               x++;
@@ -263,6 +281,11 @@ public class MenuPrincipalContoller implements Initializable {
             colUsername.setCellValueFactory(new PropertyValueFactory("userName"));
             colPasswordUsuario.setCellValueFactory(new PropertyValueFactory("usuarioContrasena"));
             colTipoUsuario.setCellValueFactory(new PropertyValueFactory("tipoUsuarioDesc"));
+            colTelefonoUsuario.setCellValueFactory(new PropertyValueFactory("telefono"));
+            colCorreoUsuario.setCellValueFactory(new PropertyValueFactory("usuarioCorreo"));
+
+            
+            
             new AutoCompleteComboBoxListener<>(cmbUserName);
             desactivarControles();
             desactivarText();
@@ -571,7 +594,6 @@ public class MenuPrincipalContoller implements Initializable {
         cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
     }
     
-    @FXML
     private void menuView(ActionEvent event) throws IOException {
         menu();
     }
@@ -692,55 +714,6 @@ public class MenuPrincipalContoller implements Initializable {
                 }
                 break;
 
-            case ELIMINAR:
-                alert.setTitle("ELIMINAR REGISTRO");
-                alert.setHeaderText("ELIMINAR REGISTRO");
-                alert.setContentText("¿Está seguro que desea Eliminar este registro?");
-               
-                alert.getButtonTypes().setAll(buttonTypeSi, buttonTypeNo);
-                
-                Optional<ButtonType> resultEliminar = alert.showAndWait();
-                
-                if(resultEliminar.get() == buttonTypeSi){
-                    try {
-                        ps = Conexion.getIntance().getConexion().prepareCall(sql);
-                        ps.execute();
-                        
-                        noti.graphic(new ImageView(imgCorrecto));
-                        noti.title("OPERACIÓN EXITOSA");
-                        noti.text("SE HA ELIMINADO EXITOSAMENTE EL REGISTRO");
-                        noti.position(Pos.BOTTOM_RIGHT);
-                        noti.hideAfter(Duration.seconds(4));
-                        noti.darkStyle();
-                        noti.show();
-                        cargarDatos();
-                        tipoOperacion = Operacion.CANCELAR;
-                        accion();
-                    }catch (SQLException ex) {
-                        ex.printStackTrace();
-                        noti.graphic(new ImageView(imgError));
-                        noti.title("ERROR AL ELIMINAR");
-                        noti.text("HA OCURRIDO UN ERROR AL ELIMINAR EL REGISTRO");
-                        noti.position(Pos.BOTTOM_RIGHT);
-                        noti.hideAfter(Duration.seconds(4));
-                        noti.darkStyle();
-                        noti.show();
-                        tipoOperacion = Operacion.CANCELAR;
-                        accion();
-                    }
-                }else{
-                     noti.graphic(new ImageView(imgError));
-                    noti.title("OPERACIÓN CANCELADA");
-                    noti.text("NO SE HA ELIMINADO EL REGISTRO");
-                    noti.position(Pos.BOTTOM_RIGHT);
-                    noti.hideAfter(Duration.seconds(4));
-                    noti.darkStyle();
-                    noti.show();
-                    tipoOperacion = Operacion.CANCELAR;
-                    accion();
-                }
-                break;
-                
             case ACTUALIZAR:
                 alert.setTitle("ACTUALIZAR REGISTRO");
                 alert.setHeaderText("ACTUALIZAR REGISTRO");
@@ -799,6 +772,8 @@ public class MenuPrincipalContoller implements Initializable {
                         txtApellidoUsuario.setText(rs.getString("usuarioApellido"));
                         txtUserName.setText(rs.getString("userName"));
                         txtPasswordUsuario.setText(rs.getString("usuarioContrasena"));
+                        txtTelefonoUsuario.setText(rs.getString("telefono"));
+                        txtCorreoUsuario.setText(rs.getString("usuarioCorreo"));
                         cmbTipoUsuario.setValue(rs.getString("tipoUsuarioDesc"));
                         codigo = rs.getInt("usuarioId");
                     }                    
@@ -865,18 +840,7 @@ public class MenuPrincipalContoller implements Initializable {
     private void btnBuscar(MouseEvent event) {
       buscar();
     }
-    
-    @FXML
-    private void btnEliminar(MouseEvent event) {    
-        if(tipoOperacion == Operacion.GUARDAR){
-            tipoOperacion = Operacion.CANCELAR;
-            accion();
-            }else{
-                String sql = "{call Sp_EliminarUsuarioPorNombre('"+txtUserName.getText()+"')}";
-                tipoOperacion = Operacion.ELIMINAR;
-                accion(sql);
-            }
-        }
+   
     
     
     @FXML
@@ -889,6 +853,9 @@ public class MenuPrincipalContoller implements Initializable {
             txtApellidoUsuario.setText(colApellidoUsuario.getCellData(index));
             txtUserName.setText(colUsername.getCellData(index));
             txtPasswordUsuario.setText(colPasswordUsuario.getCellData(index));
+            txtTelefonoUsuario.setText(colTelefonoUsuario.getCellData(index));
+            txtCorreoUsuario.setText(colCorreoUsuario.getCellData(index));
+            
             cmbTipoUsuario.setValue(colTipoUsuario.getCellData(index));
             
             btnEditar.setDisable(false);
@@ -899,6 +866,19 @@ public class MenuPrincipalContoller implements Initializable {
         }
     }
     
+    public static String md5Hash (String input) throws NoSuchAlgorithmException {
+        String result = input;
+        if(input != null) {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(input.getBytes());
+            BigInteger hash = new BigInteger(1, messageDigest.digest());
+            result = hash.toString(16);
+            while (result.length() < 32) {
+                result = "0"+result;
+            }
+        }
+        return result;
+    }
     
     @FXML
     private void btnAgregar(MouseEvent event) {
@@ -920,13 +900,28 @@ public class MenuPrincipalContoller implements Initializable {
                         nuevoUsuario.setUsuarioNombre(txtNombreUsuario.getText());
                         nuevoUsuario.setUsuarioApellido(txtApellidoUsuario.getText());
                         nuevoUsuario.setUserName(txtUserName.getText());
-                        nuevoUsuario.setUsuarioContrasena(txtPasswordUsuario.getText());
+                        
+                        nuevoUsuario.setTelefono(txtTelefonoUsuario.getText());
+                        nuevoUsuario.setUsuarioCorreo(txtCorreoUsuario.getText());
+                        
+                        try{
+                            nuevoUsuario.setUsuarioContrasena(md5Hash(txtPasswordUsuario.getText()));
+                        }catch(NoSuchAlgorithmException e){
+                            e.printStackTrace();
+                        }
+                        
+                        String nombreEmpresa = "AlasGt";
+                        Integer numeroCuenta = 1;
+                        Integer cuentaTipo = 1;
+                        Integer bancoNombre = 1;
+                        Integer estadoUsuario = 2;                        
+                        
                         if(cmbTipoUsuario.getValue().equals("Administrador")){
                                tipoUsuario = 1;
                         }else{
                             tipoUsuario = 2;
                         }
-                        String sql = "{call Sp_AgregarUsuario('"+nuevoUsuario.getUsuarioNombre()+"','"+nuevoUsuario.getUsuarioApellido()+"','"+nuevoUsuario.getUserName()+"','"+nuevoUsuario.getUsuarioContrasena()+"','"+tipoUsuario+"')}";
+                        String sql = "{call Sp_AgregarUsuario2('"+nuevoUsuario.getUsuarioNombre()+"','"+nuevoUsuario.getUsuarioApellido()+"','"+nuevoUsuario.getUserName()+"','"+nuevoUsuario.getUsuarioContrasena()+"','"+nuevoUsuario.getUsuarioCorreo()+"','"+tipoUsuario+"','"+nombreEmpresa+"','"+numeroCuenta+"','"+cuentaTipo+"','"+bancoNombre+"','"+nuevoUsuario.getTelefono()+"','"+estadoUsuario+"')}";
                         accion(sql);
                     }else{
                         Notifications noti = Notifications.create();
@@ -959,14 +954,19 @@ public class MenuPrincipalContoller implements Initializable {
         nuevoUsuario.setUsuarioNombre(txtNombreUsuario.getText());
         nuevoUsuario.setUsuarioApellido(txtApellidoUsuario.getText());
         nuevoUsuario.setUserName(txtUserName.getText());
-        nuevoUsuario.setUsuarioContrasena(txtPasswordUsuario.getText());
-        if(cmbTipoUsuario.getValue().equals("Administrador")){
-               tipoUsuario = 1;
-        }else{
-            tipoUsuario = 2;
+        
+        try{
+        nuevoUsuario.setUsuarioContrasena(md5Hash(txtPasswordUsuario.getText()));
+        }catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
         }
+                        
+        
+        nuevoUsuario.setTelefono(txtTelefonoUsuario.getText());
+        nuevoUsuario.setUsuarioCorreo(txtCorreoUsuario.getText());
+
         tipoOperacion = Operacion.ACTUALIZAR;
-        String sql = "{call Sp_ActualizarUsuario('"+codigoBuscado+"','"+nuevoUsuario.getUsuarioNombre()+"','"+nuevoUsuario.getUsuarioApellido()+"','"+nuevoUsuario.getUserName()+"','"+nuevoUsuario.getUsuarioContrasena()+"')}";
+        String sql = "{call SpEditarUsuarioSoftware('"+codigoBuscado+"','"+nuevoUsuario.getUsuarioNombre()+"','"+nuevoUsuario.getUsuarioApellido()+"','"+nuevoUsuario.getUserName()+"','"+nuevoUsuario.getUsuarioContrasena()+"','"+nuevoUsuario.getTelefono()+"','"+nuevoUsuario.getUsuarioCorreo()+"')}";
         accion(sql);
 }
     

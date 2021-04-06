@@ -8,18 +8,23 @@ public class Usuario {
     private String userName; 
     private String usuarioContrasena;
     private String tipoUsuarioDesc;
+    private String usuarioCorreo;
+    private String telefono;
 
     public Usuario() {
     }
 
-    public Usuario(int usuarioId, String userName, String usuarioNombre, String usuarioApellido, String usuarioContrasena, String tipoUsuarioDesc) {
+    public Usuario(int usuarioId, String usuarioNombre, String usuarioApellido, String userName, String usuarioContrasena, String tipoUsuarioDesc, String usuarioCorreo, String telefono) {
         this.usuarioId = usuarioId;
-        this.userName = userName;
         this.usuarioNombre = usuarioNombre;
         this.usuarioApellido = usuarioApellido;
+        this.userName = userName;
         this.usuarioContrasena = usuarioContrasena;
         this.tipoUsuarioDesc = tipoUsuarioDesc;
+        this.usuarioCorreo = usuarioCorreo;
+        this.telefono = telefono;
     }
+
 
     public int getUsuarioId() {
         return usuarioId;
@@ -68,6 +73,23 @@ public class Usuario {
     public void setTipoUsuarioDesc(String tipoUsuarioDesc) {
         this.tipoUsuarioDesc = tipoUsuarioDesc;
     }
+
+    public String getUsuarioCorreo() {
+        return usuarioCorreo;
+    }
+
+    public void setUsuarioCorreo(String usuarioCorreo) {
+        this.usuarioCorreo = usuarioCorreo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
     
     
 }

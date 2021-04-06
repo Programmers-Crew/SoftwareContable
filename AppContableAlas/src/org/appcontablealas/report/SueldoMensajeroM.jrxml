@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SueldoMensajeroM" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="47c772eb-4bcb-4ddb-a69e-4a5328139a79">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mensajero" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call Sp_MensajeroPagaCCM($P!{fechaInicio},$P!{fechaFinal},$P!{mensajero});]]>
+	</queryString>
+	<field name="mensajero" class="java.lang.String"/>
+	<field name="pedidoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoFecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="formaPagoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sueldo mensajero" class="java.math.BigDecimal"/>
+	<field name="Ingreso Neto" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="26">
+			<rectangle radius="6">
+				<reportElement x="0" y="0" width="555" height="23" forecolor="#FFFFFF" backcolor="#401474" uuid="7145b505-b478-41fb-8a5f-c9d26788f81b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="37" y="0" width="125" height="23" forecolor="#FFFFFF" uuid="0cd95d5e-03b6-4f21-902c-326a11ec6e35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MENSAJERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="-2" width="125" height="25" forecolor="#FFFFFF" uuid="e7690a11-822e-4825-ab44-09adb83f666a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUELDO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="125" height="23" forecolor="#FFFFFF" uuid="d81eb121-857b-44d3-a21e-325b892a63db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INGRESO NETO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<rectangle radius="6">
+				<reportElement x="0" y="0" width="555" height="22" forecolor="#FFFFFF" backcolor="#999999" uuid="3fa7141d-acff-44a6-9239-894bf32a3a87"/>
+			</rectangle>
+			<textField>
+				<reportElement x="37" y="0" width="125" height="22" uuid="c5d5748d-5355-487f-9209-de4b7f2a7b82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mensajero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="125" height="23" uuid="8f38c749-372f-43e3-a2cf-c299c6a112ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Sueldo mensajero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="125" height="23" uuid="218ae906-89ca-4bbc-abed-35fee9419e1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Ingreso Neto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

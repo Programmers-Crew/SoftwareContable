@@ -43,9 +43,8 @@ import org.controlsfx.control.Notifications;
 public class PedidosViewController implements Initializable {
 
     CambioScene cambioScene = new CambioScene();
-    @FXML
-    private ComboBox<String> cmbEstadoPedidoBusqueda;
 
+Integer pedidoId = 0;
     
     public enum Operacion{AGREGAR,GUARDAR,ELIMINAR,BUSCAR,ACTUALIZAR,CANCELAR,NINGUNO};
     public Operacion tipoOperacion= Operacion.NINGUNO;
@@ -74,14 +73,8 @@ public class PedidosViewController implements Initializable {
     private Pane btnReportes;
     @FXML
     private JFXButton btnBuscar;
-    @FXML
-    private AnchorPane anchor1;
-    @FXML
     private JFXTextField txtCodigoPedido;
     private JFXTextField txtEstadoPedido;
-    @FXML
-    private JFXTextField txtCostoPedido;
-    @FXML
     private JFXButton btnAgregar;
     @FXML
     private JFXButton btnFiltrar;
@@ -115,40 +108,19 @@ public class PedidosViewController implements Initializable {
     private TableColumn<Pedido, String> colDireccionFinalPedido;
     @FXML
     private TableColumn<Pedido, String> colReceptorPedido;
-    @FXML
     private ComboBox<String> cmbMensajero;
     @FXML
     private ComboBox<Integer> cmbCodigoPedido;
     @FXML
-    private ComboBox<String> cmbEstadoPedido;
+    private ComboBox<String> cmbEstadoPedidoBusqueda;
+    @FXML
+    private JFXTextArea colComentarioPedido;
     
-     public void limpiarText(){
-        txtCodigoPedido.setText("");
-        txtCostoPedido.setText("");
-        cmbMensajero.setValue("");
-        cmbEstadoPedido.setValue("");
-        cmbMensajero.setPromptText("Seleccione un Mensajero");
-    }
-    
-    public void desactivarText(){
-        txtCodigoPedido.setEditable(false);
-        txtCostoPedido.setEditable(false);
-        cmbMensajero.setDisable(true);
-        cmbEstadoPedido.setDisable(true);
-    }
-    
-    public void activarText(){
-        txtCodigoPedido.setEditable(true);
-        txtCostoPedido.setEditable(true);
-        cmbMensajero.setDisable(false);
-        cmbEstadoPedido.setDisable(false);
-    }
-
-    
+   
      public ObservableList<Pedido> getPedido(){
         ArrayList<Pedido> lista = new ArrayList();
         ArrayList<Integer> listaCodigoPedido = new ArrayList();
-        String sql = "{call Sp_ListarPedido()}";
+        String sql = "{call SpListarPedidoSoftware()}";
         int x=0;
         try {
             PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
@@ -167,13 +139,14 @@ public class PedidosViewController implements Initializable {
                         rs.getDouble("pedidoMonto"),
                         rs.getDouble("pedidoCosto"),
                         rs.getString("formaPagoDesc"),
-                        rs.getString("estadoPedidoDesc")
+                        rs.getString("estadoPedidoDesc"),
+                        rs.getString("comentarioMensajero")
                 ));
               listaCodigoPedido.add(x,rs.getInt("pedidoId"));
               x++;
             }
-            listaCmbCodigoPedido = FXCollections.observableList(listaCodigoPedido);
-            cmbCodigoPedido.setItems(listaCmbCodigoPedido);
+           listaCmbCodigoPedido = FXCollections.observableList(listaCodigoPedido);
+           cmbCodigoPedido.setItems(listaCmbCodigoPedido);
         } catch (SQLException ex) {
             ex.printStackTrace();
             Image imgError = new Image("org/appcontablealas/img/error.png");
@@ -189,48 +162,7 @@ public class PedidosViewController implements Initializable {
         return listaPedidos = FXCollections.observableList(lista);
     }
      
-     
-         
-    public void llenarComboBoxMensajero(){
-        String sql = "{call Sp_ListarMensajero()}";
-        int x = 0;
-        ArrayList<String>lista= new ArrayList<>();
-        try {
-            PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                lista.add(x,rs.getString("userName"));
-                x++;
-            }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        listaCmbMensajeros = FXCollections.observableList(lista);
-        cmbMensajero.setItems(listaCmbMensajeros);
-    }
-    
-             
-    public void llenarComboBoxEstadoPedido(){
-        String sql = "{call Sp_ListarEstadoPedido()}";
-        int x = 0;
-        ArrayList<String>lista= new ArrayList<>();
-        try {
-            PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                lista.add(x,rs.getString("estadoPedidoDesc"));
-                x++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        listaCmbEstadoPedido = FXCollections.observableList(lista);
-        listaCmbEstadoPedidoBusqueda = FXCollections.observableList(lista);
-        cmbEstadoPedidoBusqueda.setItems(listaCmbEstadoPedidoBusqueda);
-        cmbEstadoPedido.setItems(listaCmbEstadoPedido);
-    }
-    
+ 
         public void cargarDatos(){
         tblPedido.setItems(getPedido());
         
@@ -247,10 +179,8 @@ public class PedidosViewController implements Initializable {
             colFormaPagoPedido.setCellValueFactory(new PropertyValueFactory("formaPagoDesc"));
             colEstadoPedido.setCellValueFactory(new PropertyValueFactory("estadoPedidoDesc"));
             
-            new AutoCompleteComboBoxListener<>(cmbMensajero);
-            desactivarText();
-            llenarComboBoxMensajero();
             llenarComboBoxEstadoPedido();
+            
     }
         
         
@@ -275,7 +205,8 @@ public class PedidosViewController implements Initializable {
                         rs.getDouble("pedidoMonto"),
                         rs.getDouble("pedidoCosto"),
                         rs.getString("formaPagoDesc"),
-                        rs.getString("estadoPedidoDesc")
+                        rs.getString("estadoPedidoDesc"),
+                        rs.getString("comentarioMensajero")
                 ));
             }
         } catch (SQLException ex) {
@@ -310,16 +241,14 @@ public class PedidosViewController implements Initializable {
             colFormaPagoPedido.setCellValueFactory(new PropertyValueFactory("formaPagoDesc"));
             colEstadoPedido.setCellValueFactory(new PropertyValueFactory("estadoPedidoDesc"));
             
-            new AutoCompleteComboBoxListener<>(cmbMensajero);
-            desactivarText();
-            llenarComboBoxMensajero();
             llenarComboBoxEstadoPedido();
+            
     }
     
     
     public ObservableList<Pedido> getPedidoBuscadoPorEstado(){
         ArrayList<Pedido> lista = new ArrayList();
-        String sql = "{call Sp_ListarPedidoPorEstado('"+cmbEstadoPedidoBusqueda.getValue()+"')}";
+        String sql = "{call SpListarPedidoEstadoSoftware('"+cmbEstadoPedidoBusqueda.getValue()+"')}";
         try {
             PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
             ResultSet rs = ps.executeQuery();
@@ -337,7 +266,8 @@ public class PedidosViewController implements Initializable {
                         rs.getDouble("pedidoMonto"),
                         rs.getDouble("pedidoCosto"),
                         rs.getString("formaPagoDesc"),
-                        rs.getString("estadoPedidoDesc")
+                        rs.getString("estadoPedidoDesc"),
+                        rs.getString("comentarioMensajero")
                 ));
             }
         } catch (SQLException ex) {
@@ -371,10 +301,8 @@ public class PedidosViewController implements Initializable {
             colFormaPagoPedido.setCellValueFactory(new PropertyValueFactory("formaPagoDesc"));
             colEstadoPedido.setCellValueFactory(new PropertyValueFactory("estadoPedidoDesc"));
             
-            new AutoCompleteComboBoxListener<>(cmbMensajero);
-            desactivarText();
-            llenarComboBoxMensajero();
             llenarComboBoxEstadoPedido();
+            
     }
      
      
@@ -389,28 +317,7 @@ public class PedidosViewController implements Initializable {
 }
     
      
-        public void accion(){
-        switch(tipoOperacion){
-            case AGREGAR:
-                tipoOperacion = PedidosViewController.Operacion.GUARDAR;
-                cancelar = PedidosViewController.Operacion.CANCELAR;
-                btnAgregar.setText("GUARDAR");
-                activarText();
-                cmbMensajero.setDisable(true);
-                btnBuscar.setDisable(true);
-                limpiarText();
-                break;
-            case CANCELAR:
-                tipoOperacion = PedidosViewController.Operacion.NINGUNO;
-                desactivarText();
-                btnAgregar.setText("AGREGAR");
-                limpiarText();
-                cmbMensajero.setDisable(false);
-                btnBuscar.setDisable(false);
-                cancelar = PedidosViewController.Operacion.NINGUNO;
-                break;
-        }
-    }
+
         
         public void accion(String sql){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -420,53 +327,6 @@ public class PedidosViewController implements Initializable {
         ButtonType buttonTypeSi = new ButtonType("Si");
         ButtonType buttonTypeNo = new ButtonType("No");
         switch(tipoOperacion){
-            case GUARDAR: 
-                alert.setTitle("ACTUALIZAR PEDIDO");
-                alert.setHeaderText("ACTUALIZAR PEDIDO");
-                alert.setContentText("¿Está seguro que desea actualizar este pedido?");
-                
-                alert.getButtonTypes().setAll(buttonTypeSi, buttonTypeNo);
-                
-                Optional<ButtonType> result = alert.showAndWait();
-                if(result.get() == buttonTypeSi ){
-                    try {
-                        ps = Conexion.getIntance().getConexion().prepareCall(sql);
-                        ps.execute();
-                        
-                        noti.graphic(new ImageView(imgCorrecto));
-                        noti.title("OPERACIÓN EXITOSA");
-                        noti.text("SE HA ACTUALIZADO EXITOSAMENTE EL PEDIDO");
-                        noti.position(Pos.BOTTOM_RIGHT);
-                        noti.hideAfter(Duration.seconds(4));
-                        noti.darkStyle();
-                        noti.show();
-                        tipoOperacion = PedidosViewController.Operacion.CANCELAR;
-                        accion();
-                        cargarDatos();
-                    }catch (SQLException ex) {
-                        ex.printStackTrace();
-                        noti.graphic(new ImageView(imgError));
-                        noti.title("ERROR AL ACTUALIZAR");
-                        noti.text("HA OCURRIDO UN ERROR AL ACTUALIZAR EL PEDIDO");
-                        noti.position(Pos.BOTTOM_RIGHT);
-                        noti.hideAfter(Duration.seconds(4));
-                        noti.darkStyle();
-                        noti.show();
-                        tipoOperacion = PedidosViewController.Operacion.CANCELAR;
-                        accion();
-                    }
-                }else{
-                    noti.graphic(new ImageView(imgError));
-                    noti.title("OPERACIÓN CANCELADA");
-                    noti.text("NO SE HA CANCELADO LA OPERACION");
-                    noti.position(Pos.BOTTOM_RIGHT);
-                    noti.hideAfter(Duration.seconds(4));
-                    noti.darkStyle();
-                    noti.show();
-                    tipoOperacion = PedidosViewController.Operacion.CANCELAR;
-                    accion();
-                }
-                break;
             case BUSCAR:
                 try{
                     ps = Conexion.getIntance().getConexion().prepareCall(sql);
@@ -495,7 +355,6 @@ public class PedidosViewController implements Initializable {
                         noti.darkStyle();
                         noti.show();
                         tipoOperacion = PedidosViewController.Operacion.CANCELAR;
-                        accion();
                     }
                 }catch(SQLException ex){
                     ex.printStackTrace();
@@ -507,7 +366,6 @@ public class PedidosViewController implements Initializable {
                     noti.darkStyle();
                     noti.show();
                     tipoOperacion = PedidosViewController.Operacion.CANCELAR;
-                    accion();
                 }
                 break;
         }
@@ -517,7 +375,7 @@ public class PedidosViewController implements Initializable {
         public void buscarDescripcion(){
            Notifications noti = Notifications.create();
 
-            String sql = "{call Sp_BuscarDescPedido('"+txtCodigoPedido.getText()+"')}";
+            String sql = "{call Sp_BuscarDescPedido('"+pedidoId+"')}";
             accion(sql);
             
             PreparedStatement ps;
@@ -560,83 +418,85 @@ public class PedidosViewController implements Initializable {
                     tipoOperacion = Operacion.CANCELAR;
                 }
         }      
-        
-    public int verificarEstadoProducto(String estadoProducto){
-        
-        String sql = "{call Sp_BuscarEstadoPorNombre('"+estadoProducto+"')}";
-        int codigoEstado=0;
-        try{
-            PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                codigoEstado = rs.getInt("estadoPedidoId");
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        
-        return codigoEstado;
-    }
-      
-    
-    public int verificarMensajero(String mensajero){
-        
-        String sql = "{call Sp_BuscarCodigoUsuario('"+mensajero+"')}";
-        int codigoUsername=0;
-        try{
-            PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                codigoUsername = rs.getInt("usuarioId");
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        
-        return codigoUsername;
-    }
-    
 
         
-        @FXML
+    public void buscarComentario(){
+           Notifications noti = Notifications.create();
+
+            String sql = "{call Sp_BuscarPedido('"+pedidoId+"')}";
+            accion(sql);
+            
+            PreparedStatement ps;
+            ResultSet rs;
+            
+            try{
+                    ps = Conexion.getIntance().getConexion().prepareCall(sql);
+                    rs = ps.executeQuery();
+                    int numero=0;
+                    
+                    while(rs.next()){
+                        colComentarioPedido.setText(rs.getString("comentarioMensajero"));                        
+                    }                    
+                    if(rs.first()){
+                        for(int i=0; i<tblPedido.getItems().size(); i++){
+                            if(colCodigoPedido.getCellData(i) == codigoPedidos){
+                                tblPedido.getSelectionModel().select(i);
+                                break;
+                            }
+                        }
+                    }else{
+                        noti.graphic(new ImageView(imgError));
+                        noti.title("ERROR AL BUSCAR");
+                        noti.text("NO SE HA ENCONTRADO EN LA BASE DE DATOS");
+                        noti.position(Pos.BOTTOM_RIGHT);
+                        noti.hideAfter(Duration.seconds(4));
+                        noti.darkStyle();
+                        noti.show();
+                        tipoOperacion = Operacion.CANCELAR;
+                    }
+                }catch(SQLException ex){
+                    ex.printStackTrace();
+                    noti.graphic(new ImageView(imgError));
+                    noti.title("ERROR AL BUSCAR");
+                    noti.text("HA OCURRIDO UN ERROR EN LA BASE DE DATOS");
+                    noti.position(Pos.BOTTOM_RIGHT);
+                    noti.hideAfter(Duration.seconds(4));
+                    noti.darkStyle();
+                    noti.show();
+                    tipoOperacion = Operacion.CANCELAR;
+                }
+        }   
+    
+        public void llenarComboBoxEstadoPedido(){
+        String sql = "{call Sp_ListarEstadoPedido()}";
+        int x = 0;
+        ArrayList<String>lista= new ArrayList<>();
+        try {
+            PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                lista.add(x,rs.getString("estadoPedidoDesc"));
+                x++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        listaCmbEstadoPedido = FXCollections.observableList(lista);
+        listaCmbEstadoPedidoBusqueda = FXCollections.observableList(lista);
+        cmbEstadoPedidoBusqueda.setItems(listaCmbEstadoPedidoBusqueda);
+    }
+
+    @FXML
     private void seleccionarElementos(MouseEvent event) {
         int index = tblPedido.getSelectionModel().getSelectedIndex();
-        try{
-            activarText();
-            txtCodigoPedido.setText(colCodigoPedido.getCellData(index).toString());
-            txtCostoPedido.setText(colCostoPedido.getCellData(index).toString());
-            cmbEstadoPedido.setValue(colEstadoPedido.getCellData(index));
-            cmbMensajero.setValue(colMensajeroPedido.getCellData(index));
-            
-            buscarDescripcion();
-        }catch(Exception e){
-           e.printStackTrace();
-        }
+
+        pedidoId = colCodigoPedido.getCellData(index);
+        buscarDescripcion();
+        buscarComentario();
     }
 
-    
-        @FXML
-    private void btnAgregar(MouseEvent event) {
-        int index = tblPedido.getSelectionModel().getSelectedIndex();
-        
-        Integer codigoBuscado = 0;
-        codigoBuscado = colCodigoPedido.getCellData(index);
-        
-        Pedido asignarPedido = new Pedido();
-        asignarPedido.setPedidoCosto(Double.parseDouble(txtCostoPedido.getText()));
-        asignarPedido.setEstadoPedidoDesc(cmbEstadoPedido.getValue());
-        asignarPedido.setMensajero(cmbMensajero.getValue());
-        
 
-        tipoOperacion = Operacion.GUARDAR;
-        String sql = "{call Sp_ConfirmarPedido('"+codigoBuscado+"','"+verificarMensajero(asignarPedido.getMensajero())+"','"+asignarPedido.getPedidoCosto()+"','"+verificarEstadoProducto(asignarPedido.getEstadoPedidoDesc())+"')}";
-        accion(sql);
-}
-    
-
-    
         
-    @FXML
     public void menuprincipal() throws IOException{
         String menuprincipalUrl = "org/appcontablealas/view/menuPrincipal.fxml";
         cambioScene.Cambio(menuprincipalUrl,(Stage) anchor.getScene().getWindow());
@@ -652,7 +512,6 @@ public class PedidosViewController implements Initializable {
         cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
     }
     
-    @FXML
     private void menuView(ActionEvent event) throws IOException {
         menu();
     }
@@ -669,7 +528,6 @@ public class PedidosViewController implements Initializable {
         cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
     }
     
-    @FXML
     private void clienteView(ActionEvent event) throws IOException {
         menu();
     }
@@ -685,7 +543,6 @@ public class PedidosViewController implements Initializable {
         cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
     }
     
-    @FXML
     private void reporteView(ActionEvent event) throws IOException {
         reporte();
     }

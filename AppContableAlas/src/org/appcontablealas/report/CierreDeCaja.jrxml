@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CierreDeCaja" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69b092fb-98b8-4b1e-b803-aef164e23d77">
-	<property name="ireport.zoom" value="1.2100000000000048"/>
+	<property name="ireport.zoom" value="1.4641000000000064"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="117"/>
 	<property name="ireport.callouts" value="##Sun Jan 24 01:53:50 CST 2021"/>
 	<subDataset name="dataset1" uuid="bf385d1d-33aa-48e0-81fe-9b918366a188"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/Program Files (x86)/appcontablealas/appcontablealas/rep/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="fechaInicio" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="fechaFinal" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["'2021-05-02'"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[call Sp_ReporteCierreDeCaja($P!{fechaInicio},$P!{fechaFinal})]]>
@@ -22,6 +22,7 @@
 	<field name="formaPagoDesc" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="empresa" class="java.lang.String"/>
 	<background>
 		<band height="752" splitType="Stretch">
 			<rectangle radius="5">
@@ -50,11 +51,11 @@
 			</staticText>
 			<image scaleImage="FillFrame">
 				<reportElement x="0" y="0" width="572" height="74" uuid="c623d384-8df4-4969-83fd-eb6ca79ce747"/>
-				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\img\\fondoSinNubbes.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Program Files (x86)/appcontablealas/appcontablealas/rep/fondoSinNubbes.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement stretchType="RelativeToTallestObject" x="-54" y="-32" width="225" height="159" uuid="85f2b1f7-baf1-4888-a4aa-6957a899a4b8"/>
-				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\img\\logoAlas.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Program Files (x86)/appcontablealas/appcontablealas/rep/logoAlas.png"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="485" y="0" width="72" height="20" forecolor="#FFFFFF" uuid="bce3f9f0-f3fe-4b66-bc97-ad0009cd0445"/>
@@ -115,14 +116,14 @@
 				<text><![CDATA[MENSAJERO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="243" y="94" width="64" height="20" uuid="24d2c846-847f-4801-9d8e-9ccc5d21a278"/>
+				<reportElement x="189" y="94" width="64" height="20" uuid="24d2c846-847f-4801-9d8e-9ccc5d21a278"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLIENTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="430" y="94" width="80" height="20" uuid="85725756-983b-4ae1-afcf-94db62761f09"/>
+				<reportElement x="445" y="94" width="80" height="20" uuid="85725756-983b-4ae1-afcf-94db62761f09"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -139,6 +140,13 @@
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TotalCierreCaja.jasper"]]></subreportExpression>
 			</subreport>
+			<staticText>
+				<reportElement x="322" y="93" width="64" height="21" uuid="88236a9b-a693-451a-b981-ecb87008a3c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPRESA]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -151,31 +159,38 @@
 			</line>
 			<textField>
 				<reportElement x="54" y="0" width="79" height="20" uuid="cfad90d8-eba4-40bd-a0d8-d4ece4bd9f0f"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mensajero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="405" y="0" width="152" height="20" uuid="21f19d7c-0fe1-494f-a419-5037f7aec5c2"/>
-				<textElement>
+				<reportElement x="445" y="0" width="80" height="20" uuid="21f19d7c-0fe1-494f-a419-5037f7aec5c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{formaPagoDesc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="243" y="0" width="64" height="20" uuid="348b8524-3980-496a-8e9c-a308ccb0cd6e"/>
-				<textElement>
+				<reportElement x="189" y="0" width="64" height="20" uuid="348b8524-3980-496a-8e9c-a308ccb0cd6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="311" y="0" width="87" height="20" uuid="2463b1d7-91c8-420f-b46e-ba6523fdd5f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="50">
+		<band height="101">
 			<subreport>
-				<reportElement x="-7" y="0" width="572" height="50" uuid="bc000877-784d-4823-861e-11446abe6d9d"/>
+				<reportElement x="-7" y="32" width="572" height="69" uuid="870a8545-a63d-4b5f-85f7-10df719f3b66"/>
 				<subreportParameter name="fechaInicio">
 					<subreportParameterExpression><![CDATA[$P{fechaInicio}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -183,7 +198,7 @@
 					<subreportParameterExpression><![CDATA[$P{fechaFinal}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SueldoMensajero.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SueldoMensajeroCC.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</summary>

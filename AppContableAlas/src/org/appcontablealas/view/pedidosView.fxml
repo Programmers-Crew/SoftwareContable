@@ -2,11 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -17,12 +15,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="836.0" prefWidth="1561.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.PedidosViewController">
+<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="836.0" prefWidth="1561.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.PedidosViewController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="36.0" prefWidth="600.0" styleClass="bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -52,61 +47,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.30635188308038225" prefHeight="386.0" prefWidth="582.0" styleClass="anchorOscuro" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane prefHeight="386.0" prefWidth="582.0" styleClass="anchorOscuro" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <items>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="paneFondoImagenSplit1">
-                                 <children>
-                                    <VBox alignment="CENTER" prefHeight="386.0" prefWidth="197.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <AnchorPane fx:id="anchor1" prefHeight="640.0" prefWidth="454.0">
-                                             <children>
-                                                <HBox alignment="CENTER" layoutX="15.0" layoutY="6.0" prefHeight="51.0" prefWidth="444.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
-                                                   <children>
-                                                      <Label prefHeight="37.0" prefWidth="184.0" text="ADMINISTRAR PEDIDOS" textFill="#fdfdfd">
-                                                         <font>
-                                                            <Font name="Arial Bold Italic" size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <Label layoutX="13.0" layoutY="118.0" prefHeight="17.0" prefWidth="52.0" text="CÓDIGO" textFill="#887979">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <JFXTextField fx:id="txtCodigoPedido" layoutX="26.0" layoutY="147.0" prefHeight="29.0" prefWidth="407.0" styleClass="textFieldCodigo" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="30.0" />
-                                                <Label layoutX="14.0" layoutY="423.0" text="ASIGNAR MENSAJERO" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="15.0" layoutY="329.0" text="ESTADO PEDIDO" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="16.0" layoutY="222.0" text="COSTO" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <JFXTextField fx:id="txtCostoPedido" layoutX="24.0" layoutY="248.0" prefHeight="29.0" prefWidth="421.0" styleClass="textFieldCodigo" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="28.0" />
-                                                <JFXButton fx:id="btnAgregar" buttonType="RAISED" layoutX="31.0" layoutY="532.0" onMouseClicked="#btnAgregar" prefHeight="38.0" prefWidth="376.0" styleClass="boton" text="ACTUALIZAR" textFill="WHITE" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="39.854511890255026">
-                                                   <font>
-                                                      <Font size="11.0" />
-                                                   </font>
-                                                </JFXButton>
-                                                <ComboBox fx:id="cmbMensajero" layoutX="22.0" layoutY="447.0" prefHeight="31.0" prefWidth="414.0" promptText="Asigne un mensajero al pedido" styleClass="combo" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="27.0" />
-                                                <ComboBox fx:id="cmbEstadoPedido" layoutX="22.0" layoutY="358.0" prefHeight="31.0" prefWidth="414.0" promptText="Estado de pedido" styleClass="combo" AnchorPane.bottomAnchor="251.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="358.0" />
-                                             </children>
-                                             <padding>
-                                                <Insets left="5.0" />
-                                             </padding>
-                                          </AnchorPane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
                               <AnchorPane fx:id="anchor2" minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="1066.0" styleClass="paneFondoImagenSplit2">
                                  <children>
                                     <TableView fx:id="tblPedido" layoutX="14.0" layoutY="134.0" onMouseClicked="#seleccionarElementos" prefHeight="464.0" prefWidth="1004.0" AnchorPane.bottomAnchor="201.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="134.0">
@@ -126,17 +68,21 @@
                                           <TableColumn fx:id="colCostoPedido" prefWidth="75.0" text="COSTO" />
                                           <TableColumn fx:id="colFormaPagoPedido" prefWidth="75.0" text="FORMA PAGO" />
                                           <TableColumn fx:id="colEstadoPedido" prefWidth="75.0" text="ESTADO" />
-                                          <TableColumn fx:id="colMensajeroPedido1" prefWidth="75.0" text="MENSAJERO" />
                                        </columns>
                                     </TableView>
                                     <JFXButton fx:id="btnBuscar" buttonType="RAISED" layoutX="479.0" layoutY="32.0" onMouseClicked="#btnBuscar" prefHeight="27.0" prefWidth="74.0" styleClass="boton" text="BUSCAR" textFill="WHITE" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="32.0" />
                                     <ComboBox fx:id="cmbCodigoPedido" editable="true" layoutX="16.0" layoutY="32.0" prefHeight="27.0" prefWidth="431.0" promptText="Ingrese el codigo del pedido" styleClass="comboOscuro" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="32.0" />
                                     <ComboBox fx:id="cmbEstadoPedidoBusqueda" editable="true" layoutX="17.0" layoutY="73.0" prefHeight="27.0" prefWidth="904.0" promptText="Ingrese el estado del pedido" styleClass="comboOscuro" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="73.0" />
-                                    <JFXTextArea fx:id="colDescPedido" layoutX="13.0" layoutY="564.0" prefHeight="154.0" prefWidth="1009.0" promptText=" Descripción del pedido..." style="-fx-background-color: white;" styleClass="textArea" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="20.0">
+                                    <JFXTextArea fx:id="colDescPedido" layoutX="13.0" layoutY="564.0" prefHeight="154.0" prefWidth="408.0" promptText=" Descripción del pedido..." style="-fx-background-color: white;" styleClass="textArea" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="13.0">
                                        <padding>
                                           <Insets top="20.0" />
                                        </padding></JFXTextArea>
                                     <JFXButton fx:id="btnFiltrar" buttonType="RAISED" layoutX="950.0" layoutY="73.0" onMouseClicked="#btnFiltrar" prefHeight="27.0" prefWidth="74.0" styleClass="boton" text="FILTRAR" textFill="WHITE" AnchorPane.rightAnchor="17.854511890254926" AnchorPane.topAnchor="73.0" />
+                                    <JFXTextArea fx:id="colComentarioPedido" layoutX="901.0" layoutY="623.0" prefHeight="154.0" prefWidth="341.0" promptText="Comentario del mensajero..." style="-fx-background-color: white;" styleClass="textArea" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="26.0">
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </JFXTextArea>
                                  </children>
                               </AnchorPane>
                            </items>

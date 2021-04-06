@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCreditos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e71ca1d-5055-4005-9043-5d8f22fcf293">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="79"/>
+	<parameter name="empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/Program Files (x86)/appcontablealas/appcontablealas/rep/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call Sp_ReporteCreditoV1($P!{fechaInicio},$P!{fechaFinal},$P!{empresa});]]>
+	</queryString>
+	<field name="creditoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estadoCreditoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="creditoRutas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoFecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoMonto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoCosto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="estadoPedidoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EmpresaDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresaNumeroCuenta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoCuentaDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bancoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="555" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="0" y="494" width="802" height="61" backcolor="#000000" uuid="2cb7aff3-983a-4cc7-be9f-0934e3474ede"/>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="802" height="74" uuid="7fe29aeb-a890-48ed-9eea-097d89c4a8ab"/>
+				<imageExpression><![CDATA["C:/Program Files (x86)/appcontablealas/appcontablealas/rep/fondoSinNubbes.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement stretchType="RelativeToTallestObject" x="-53" y="-30" width="209" height="193" uuid="2807d88c-5cb3-4638-9411-3c8c97cb1695"/>
+				<imageExpression><![CDATA["C:/Program Files (x86)/appcontablealas/appcontablealas/rep/logoAlas.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="730" y="0" width="72" height="20" forecolor="#FFFFFF" uuid="be172815-c55b-4b5e-b308-2ebb6bb423ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="535" width="100" height="20" forecolor="#666666" backcolor="#000000" uuid="39e78a00-c1fe-400b-be68-1c323840b180"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[© ALAS GT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="224" y="525" width="350" height="20" forecolor="#999999" backcolor="#000000" uuid="140ec51e-43a7-43b3-8845-d10b2f597f5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Esta completamente prohibido revelar esta informacion al publico general"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="252" y="508" width="297" height="17" forecolor="#999999" backcolor="#000000" uuid="a34b2131-1c22-444c-945a-5810444f6d64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA["Este reporte es exclusivamente para uso admnistrativo.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="695" y="0" width="35" height="20" forecolor="#FFFFFF" uuid="9c4952e9-d7bc-4b30-8048-b4c8c80438da"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["HOY:"]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="179" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="775" y="102" width="27" height="15" uuid="7ddb4e9a-6728-4290-8be3-3fbc2118a911"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="765" y="102" width="10" height="15" uuid="67031ce8-2996-4851-9a0b-d2a14f22e5e5"/>
+			</line>
+			<textField>
+				<reportElement x="739" y="102" width="26" height="15" uuid="5678cbd1-59eb-4879-a76b-2bdf63cca215"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="252" y="102" width="297" height="35" forecolor="#000000" uuid="500a8a54-489e-406a-861f-db82d66d9894"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CREDITOS"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="110" y="0" width="572" height="74" forecolor="#FFFFFF" uuid="56270dfa-41da-433c-9ee1-1565405ac23d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="26" isBold="true" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ALAS GT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="137" width="76" height="20" uuid="06a6e32a-a6a8-4f71-8d4e-ad3913af0ec7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[EMPRESA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="137" width="166" height="20" uuid="adf47f36-8b91-4f29-9f17-3a5a79d07def"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EmpresaDesc}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="178" width="802" height="1" uuid="ea7bddd7-26bd-4e7e-9db6-c962481313a4"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Dashed" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="115" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="92" width="802" height="20" forecolor="#330099" backcolor="#999999" uuid="68e3526a-d6ab-4e21-bfb0-598b2213af9c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="92" width="79" height="20" uuid="a7d8bca7-3afb-41c1-a82c-1643675ba8b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDITO ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="92" width="64" height="20" uuid="7d8f4298-8001-4600-806c-c5ce27dfffd1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="92" width="63" height="20" uuid="cd64e9b6-8a53-4a56-96d0-3af3b295fad0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="92" width="59" height="20" uuid="9fd41140-760d-4f04-8bbd-c193ea9085c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PEDIDO ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="92" width="50" height="20" uuid="802e68bd-cd07-4ede-beba-858741b4fb45"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="92" width="80" height="20" uuid="e25d60f1-3712-43b2-ba71-7b5cfd9740e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="515" y="92" width="80" height="20" uuid="6285792c-a707-4751-85ba-05671eb8edc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="615" y="92" width="80" height="20" uuid="bde8355d-caed-4d88-9941-f23c3531abc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="710" y="92" width="92" height="20" uuid="6a47f38d-c0a1-44d5-b06c-bb1e2044a492"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO PEDIDO]]></text>
+			</staticText>
+			<rectangle radius="6">
+				<reportElement x="133" y="13" width="550" height="23" forecolor="#FFFFFF" backcolor="#401474" uuid="f1599f09-20f7-4af4-a007-1f60bd890861"/>
+			</rectangle>
+			<rectangle radius="6">
+				<reportElement x="133" y="36" width="550" height="22" forecolor="#FFFFFF" backcolor="#999999" uuid="eb2161ce-990b-4f6d-ad2d-841b17e03819"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="355" y="13" width="125" height="23" forecolor="#FFFFFF" uuid="21bb28e1-8fd5-4766-bc66-3faefb9bfd37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="15" width="125" height="23" forecolor="#FFFFFF" uuid="10d68dd2-439e-4b61-99ac-af74a94b026d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BANCO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="11" width="125" height="25" forecolor="#FFFFFF" uuid="01ccd6de-b35c-4661-b46a-e303fbc03e40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO CUENTA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="38" width="125" height="20" uuid="6b61091d-16c0-4f32-83d7-7a7ccc1c1d81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresaNumeroCuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="38" width="125" height="20" uuid="7880caec-5465-40ff-9601-135863b8db84"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoCuentaDesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="534" y="36" width="125" height="20" uuid="5fc0b872-542d-4cf1-a02f-0ff1ac514596"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bancoDesc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="79" height="20" uuid="27b758f8-1c0e-4115-a854-c09cd30a5791"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{creditoId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="59" height="20" uuid="cb3dc56b-21ee-4f7f-b7f3-f901fd1648f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pedidoId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="0" width="64" height="20" uuid="7c6baacb-0204-4bee-a51e-acb4f1ccc0d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estadoCreditoDesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="0" width="63" height="20" uuid="f8d7e78f-2bb8-4839-a65b-3d505779b393"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{creditoRutas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="50" height="20" uuid="13dec113-8445-4008-b5cd-c20e87bc6f5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pedidoFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="80" height="20" uuid="c292a2af-2c70-4b3b-ad29-b8c9ac08c970"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pedidoMonto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="515" y="0" width="80" height="20" uuid="aa482bae-b031-4ddb-b7ff-62d7912a4ac3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pedidoCosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="615" y="0" width="80" height="20" uuid="f14d6ccb-10fb-4f0c-8d9e-05a43bae04e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="710" y="0" width="92" height="20" uuid="748ad91c-5ba8-4db3-b9dd-f366a846c2ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estadoPedidoDesc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

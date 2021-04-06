@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DatosEmpresa" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="507339e9-2ccb-44ac-a84d-faf9f5f012d1">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call Sp_SubReporteCreditoV1($P!{empresa});]]>
+	</queryString>
+	<field name="empresaDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresaNumeroCuenta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoCuentaDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bancoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<rectangle radius="6">
+				<reportElement x="2" y="2" width="800" height="23" forecolor="#FFFFFF" backcolor="#401474" uuid="c237cfae-ab15-4840-a025-b75140653ca7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="57" y="2" width="125" height="23" forecolor="#FFFFFF" uuid="339897fe-a724-4ee6-98e0-65c114b8e196"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="0" width="125" height="25" forecolor="#FFFFFF" uuid="8b6d5341-b81c-46cd-931a-f3b063049f2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="2" width="125" height="23" forecolor="#FFFFFF" uuid="324fe9dc-4431-4928-809d-af9e72cea142"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="619" y="4" width="125" height="23" forecolor="#FFFFFF" uuid="7a31ec2e-78f2-44e5-a27f-328c5606b1bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BANCO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle radius="6">
+				<reportElement x="2" y="0" width="800" height="22" forecolor="#FFFFFF" backcolor="#999999" uuid="d80f276b-e545-4454-b87b-8fb6dfb4029c"/>
+			</rectangle>
+			<textField>
+				<reportElement x="57" y="0" width="125" height="20" uuid="7b2cd70a-883a-4484-b3cb-57e61607bae0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresaDesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="0" width="125" height="20" uuid="b248eb29-7fc4-464d-a884-28438a4ee486"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresaNumeroCuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="125" height="20" uuid="4513cfca-d440-42f9-a5dd-6f44e5348aa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoCuentaDesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="619" y="0" width="125" height="20" uuid="ea061bfe-dd63-4b45-bcba-2c224f094cf4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bancoDesc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
