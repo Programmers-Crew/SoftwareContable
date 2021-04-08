@@ -348,9 +348,10 @@
         <menus>
           <Menu id="menuItem" mnemonicParsing="false" text="Modulos">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#Clientesview" text="Clientes    F1" />
-                  <MenuItem mnemonicParsing="false" onAction="#reportesView" text="Reportes  F2" />
-                  <MenuItem fx:id="itemInventario" mnemonicParsing="false" onAction="#pedidosView" text="Pedidos   F3" />
+              <MenuItem mnemonicParsing="false" onAction="#Clientesview" text="CLIENTES               F1" />
+                  <MenuItem mnemonicParsing="false" onAction="#reportesView" text="REPORTES             F2" />
+                  <MenuItem mnemonicParsing="false" onAction="#cierreDeCajaView" text="CIERRE DE CAJA   F3" />
+                  <MenuItem fx:id="itemInventario" mnemonicParsing="false" onAction="#pedidosView" text="PEDIDOS                 F4" />
             </items>
           </Menu>
         </menus>

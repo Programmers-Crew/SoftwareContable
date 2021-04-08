@@ -44,6 +44,9 @@ import org.controlsfx.control.Notifications;
 
 public class ClientesViewController implements Initializable {
 
+    @FXML
+    private JFXButton btnInhabilitar;
+
 
 
      public enum Operacion{AGREGAR,GUARDAR,ELIMINAR,BUSCAR,ACTUALIZAR,CANCELAR,NINGUNO};
@@ -549,7 +552,56 @@ public class ClientesViewController implements Initializable {
         accion(sql);
 }
     
-    
+   @FXML
+   private void btnInhabilitar(MouseEvent event) throws SQLException{
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Notifications noti = Notifications.create();
+        ButtonType buttonTypeSi = new ButtonType("Si");
+        ButtonType buttonTypeNo = new ButtonType("No");
+        
+        
+       String username = txtUserNameCliente.getText();
+       System.out.println(username);
+
+        
+        alert.setTitle("INHABILITAR CLIENTE");
+        alert.setHeaderText("INHABILITAR CLIENTE");
+        alert.setContentText("¿Está seguro que desea inhabilitar a este cliente?");
+        alert.getButtonTypes().setAll(buttonTypeSi, buttonTypeNo);
+                
+        Optional<ButtonType> resultactualizar = alert.showAndWait();
+        
+            if(resultactualizar.get() == buttonTypeSi ){
+                try{
+                String sql = "{call SpInhabilitarCliente('"+username+"')}";
+                PreparedStatement ps = Conexion.getIntance().getConexion().prepareCall(sql);
+                ResultSet rs = ps.executeQuery();
+                
+                noti.graphic(new ImageView(imgCorrecto));
+                noti.title("CLIENTE INHABILITADO");
+                noti.text(username+" "+"ha sido inhabilitado");
+                noti.position(Pos.BOTTOM_RIGHT);
+                noti.hideAfter(Duration.seconds(4));
+                noti.darkStyle();
+                noti.show();
+                    
+                }catch(Exception e){
+                    e.printStackTrace();
+                 noti.graphic(new ImageView(imgError));
+                 noti.title("CLIENTE NO HA SIDO INHABILITADO");
+                 noti.text(username+" "+" no se ha podido inhabilitar");
+                 noti.position(Pos.BOTTOM_RIGHT);
+                 noti.hideAfter(Duration.seconds(4));
+                 noti.darkStyle();
+                 noti.show();
+                }
+                
+            }
+
+    }
+            
+
+  
    //Menu
     public void menu() throws IOException{
         String inventarioUrl = "org/appcontablealas/view/menuPrincipal.fxml";

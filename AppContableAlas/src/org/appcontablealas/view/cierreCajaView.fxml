@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="552.0" prefWidth="1112.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.ClientesViewController">
+<AnchorPane id="AnchorPane" fx:id="anchor" minHeight="466.0" minWidth="865.0" prefHeight="552.0" prefWidth="1112.0" stylesheets="@../resource/moduloStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.appcontablealas.controller.ClierreDeCajaViewController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="36.0" prefWidth="600.0" styleClass="bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -101,7 +101,7 @@
                                                                </children>
                                                             </GridPane>
                                                             <JFXDatePicker fx:id="txtFechaInicioC" layoutX="15.0" layoutY="145.0" prefHeight="31.0" prefWidth="190.0" />
-                                                            <Button fx:id="btnCierreDeCaja" layoutX="37.0" layoutY="277.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
+                                                            <Button fx:id="btnCierreDeCaja" layoutX="37.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#generarReporteCierreDeCaja" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
                                                             <Label layoutX="16.0" layoutY="128.0" text="FECHA INICIO">
                                                                <font>
                                                                   <Font name="System Italic" size="12.0" />
@@ -160,7 +160,7 @@
                                                                </children>
                                                             </GridPane>
                                                             <JFXDatePicker fx:id="txtFechaInicioCC" layoutX="11.0" layoutY="93.0" prefHeight="31.0" prefWidth="190.0" />
-                                                            <Button fx:id="btnCierreDeCajaC" layoutX="35.0" layoutY="276.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
+                                                            <Button fx:id="btnCierreDeCajaC" layoutX="35.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#generarReporteCierreDeCajaC" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
                                                             <Label layoutX="12.0" layoutY="76.0" text="FECHA INICIO">
                                                                <font>
                                                                   <Font name="System Italic" size="12.0" />
@@ -225,7 +225,7 @@
                                                                </children>
                                                             </GridPane>
                                                             <JFXDatePicker fx:id="txtFechaInicioCE" layoutX="13.0" layoutY="96.0" prefHeight="31.0" prefWidth="190.0" />
-                                                            <Button fx:id="btnCierreDeCajaE" layoutX="37.0" layoutY="277.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
+                                                            <Button fx:id="btnCierreDeCajaE" layoutX="37.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#generarReporteCierreDeCajaE" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
                                                             <Label layoutX="14.0" layoutY="79.0" text="FECHA INICIO">
                                                                <font>
                                                                   <Font name="System Italic" size="12.0" />
@@ -290,7 +290,7 @@
                                                                </children>
                                                             </GridPane>
                                                             <JFXDatePicker fx:id="txtFechaInicioCM" layoutX="11.0" layoutY="100.0" prefHeight="31.0" prefWidth="190.0" />
-                                                            <Button fx:id="btnCierreDeCajaM" layoutX="37.0" layoutY="277.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
+                                                            <Button fx:id="btnCierreDeCajaM" layoutX="37.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#generarReporteCierreDeCajaM" prefHeight="31.0" prefWidth="142.0" styleClass="boton" text="GENERAR" textFill="WHITE" />
                                                             <Label layoutX="12.0" layoutY="83.0" text="FECHA INICIO">
                                                                <font>
                                                                   <Font name="System Italic" size="12.0" />

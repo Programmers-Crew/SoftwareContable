@@ -582,6 +582,22 @@ public class MenuPrincipalContoller implements Initializable {
     }
     
     
+    //Cierre de caja
+    public void cierreDeCaja() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/cierreCajaView.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    @FXML
+    private void cierreDeCajaView(ActionEvent event) throws IOException {
+        cierreDeCaja();
+    }
+    
+    @FXML
+    private void cierreDeCajaAtajo(MouseEvent event) throws IOException {
+        cierreDeCaja();
+    }
+    
     //atajos de menu de bienvenida
     @FXML
     private void AtajosInicio(KeyEvent event) {
@@ -621,8 +637,12 @@ public class MenuPrincipalContoller implements Initializable {
                reportes();
            }else{
                if(event.getCode() == KeyCode.F3){
+                   cierreDeCaja();
+               }else{
+                   if(event.getCode() == KeyCode.F4){
                    pedidos();
-               }
+                   }
+                }
            }
        }
        
