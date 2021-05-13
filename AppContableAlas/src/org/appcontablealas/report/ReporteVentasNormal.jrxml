@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteVentas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69b092fb-98b8-4b1e-b803-aef164e23d77">
+	<property name="ireport.zoom" value="1.0000000000000038"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="461"/>
+	<property name="ireport.callouts" value="##Sun Jan 24 01:53:50 CST 2021"/>
+	<subDataset name="dataset1" uuid="bf385d1d-33aa-48e0-81fe-9b918366a188"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/git/SoftwareContable/AppContableAlas/src/org/appcontablealas/report/]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call Sp_SubReporteVentas($P!{fechaInicio},$P!{fechaFinal})]]>
+	</queryString>
+	<field name="pedidoMensajeroId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mensajero" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="pedidoTelefonoReceptor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoMonto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoCosto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="formaPagoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="752" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="0" y="691" width="572" height="61" backcolor="#000000" uuid="8e52752b-5d81-4979-a2e0-1fc653d05c54"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="133" y="702" width="297" height="17" forecolor="#999999" backcolor="#000000" uuid="e96e6185-a884-4912-9c10-5dc0ce2628bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA["Este reporte es exclusivamente para uso admnistrativo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="107" y="719" width="350" height="20" forecolor="#999999" backcolor="#000000" uuid="beedc61b-c93c-462e-992a-aef8c3da11b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Esta completamente prohibido revelar esta informacion al publico general""]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="732" width="100" height="20" forecolor="#666666" backcolor="#000000" uuid="37f23191-9b45-477d-b6ab-603f86a82597"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[© ALAS GT]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="485" y="0" width="72" height="20" forecolor="#FFFFFF" uuid="bce3f9f0-f3fe-4b66-bc97-ad0009cd0445"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="35" height="20" forecolor="#FFFFFF" uuid="46cd23fc-a5d9-4cad-8d8a-50ef0b68115f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["HOY:"]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="-3" width="572" height="78" uuid="41b56d11-f077-40d6-87b8-97d37736d309"/>
+				<imageExpression><![CDATA["C:/git/SoftwareContable/AppContableAlas/src/org/appcontablealas/report/fondoSinNubbes.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="-38" y="-30" width="202" height="160" uuid="55a7e42c-4d15-49d8-9b6e-157363a13be8"/>
+				<imageExpression><![CDATA["C:/git/SoftwareContable/AppContableAlas/src/org/appcontablealas/report/logoAlas.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="130" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="115" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="94" width="572" height="20" forecolor="#330099" backcolor="#999999" uuid="a9669f95-bdcd-46eb-b1c2-4b8f3862a913"/>
+			</rectangle>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="30" width="572" height="1" uuid="7b2846d5-310d-4e02-a7fc-4067ec0295cd"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="50"/>
+	</summary>
+	<noData>
+		<band height="50"/>
+	</noData>
+</jasperReport>

@@ -82,8 +82,6 @@ public class MenuPrincipalContoller implements Initializable {
     @FXML
     private AnchorPane cajaClientes;
     @FXML
-    private AnchorPane cajaMensajero;
-    @FXML
     private AnchorPane cajaReportes;
     @FXML
     private AnchorPane cajaPedidos;
@@ -335,25 +333,6 @@ public class MenuPrincipalContoller implements Initializable {
        ttCliente.setCycleCount(1);
        ttCliente.play();
        
-       // caja de Mensajero
-       
-        FadeTransition ftInventario = new FadeTransition();
-       ftInventario.setFromValue(0);
-       ftInventario.setToValue(1);
-       ftInventario.setDuration(Duration.seconds(2));
-       ftInventario.setNode(cajaMensajero);
-       ftInventario.setCycleCount(1);
-       ftInventario.play();
-       
-       
-       TranslateTransition tInventario = new TranslateTransition();
-       tInventario.setFromY(-60);
-       tInventario.setToY(0);
-       tInventario.setDuration(Duration.seconds(2.5));
-       tInventario.setNode(cajaMensajero);
-       tInventario.setCycleCount(1);
-       tInventario.play();
-       
        //caja de pedidos
           FadeTransition ftPrecios = new FadeTransition();
        ftPrecios.setFromValue(0);
@@ -472,25 +451,7 @@ public class MenuPrincipalContoller implements Initializable {
        ttCliente.setNode(cajaClientes);
        ttCliente.setCycleCount(1);
        ttCliente.play();
-       
-       // caja de Mensajero
-       
-        FadeTransition ftInventario = new FadeTransition();
-       ftInventario.setFromValue(0);
-       ftInventario.setToValue(1);
-       ftInventario.setDuration(Duration.seconds(2));
-       ftInventario.setNode(cajaMensajero);
-       ftInventario.setCycleCount(1);
-       ftInventario.play();
-       
-       
-       TranslateTransition tInventario = new TranslateTransition();
-       tInventario.setFromY(-60);
-       tInventario.setToY(0);
-       tInventario.setDuration(Duration.seconds(2.5));
-       tInventario.setNode(cajaMensajero);
-       tInventario.setCycleCount(1);
-       tInventario.play();
+
        
        //caja de pedidos
           FadeTransition ftPrecios = new FadeTransition();

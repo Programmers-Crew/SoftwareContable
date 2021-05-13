@@ -2,11 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteVentas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69b092fb-98b8-4b1e-b803-aef164e23d77">
 	<property name="ireport.zoom" value="1.0000000000000038"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="72"/>
 	<property name="ireport.callouts" value="##Sun Jan 24 01:53:50 CST 2021"/>
 	<subDataset name="dataset1" uuid="bf385d1d-33aa-48e0-81fe-9b918366a188"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/git/SoftwareContable/AppContableAlas/src/org/appcontablealas/report/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="fechaInicio" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -36,9 +36,6 @@
 	</field>
 	<background>
 		<band height="752" splitType="Stretch">
-			<rectangle radius="5">
-				<reportElement x="0" y="691" width="572" height="61" backcolor="#000000" uuid="8e52752b-5d81-4979-a2e0-1fc653d05c54"/>
-			</rectangle>
 			<staticText>
 				<reportElement mode="Opaque" x="133" y="702" width="297" height="17" forecolor="#999999" backcolor="#000000" uuid="e96e6185-a884-4912-9c10-5dc0ce2628bc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -60,14 +57,6 @@
 				</textElement>
 				<text><![CDATA[© ALAS GT]]></text>
 			</staticText>
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="572" height="74" uuid="c623d384-8df4-4969-83fd-eb6ca79ce747"/>
-				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\img\\fondoSinNubbes.png"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement stretchType="RelativeToTallestObject" x="-54" y="-32" width="225" height="159" uuid="85f2b1f7-baf1-4888-a4aa-6957a899a4b8"/>
-				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\img\\logoAlas.png"]]></imageExpression>
-			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="485" y="0" width="72" height="20" forecolor="#FFFFFF" uuid="bce3f9f0-f3fe-4b66-bc97-ad0009cd0445"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -82,6 +71,14 @@
 				</textElement>
 				<textFieldExpression><![CDATA["HOY:"]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="572" height="67" uuid="2dfccb38-a38b-43ef-a37a-55847a7abc02"/>
+				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\fondoSinNubbes.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="-7" y="0" width="134" height="80" uuid="ab659d16-576a-4e8e-9d54-c1e485bf543b"/>
+				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\logoAlas.png"]]></imageExpression>
+			</image>
 		</band>
 	</background>
 	<pageHeader>
@@ -103,7 +100,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="20"/>
 				</textElement>
-				<textFieldExpression><![CDATA["CIERRE DE CAJA"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["CIERRE DE CAJAp po"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="0" y="0" width="572" height="74" forecolor="#FFFFFF" uuid="195002a6-fd0d-418a-bd85-1511c3c41a2f"/>
@@ -115,7 +112,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="115" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="94" width="572" height="20" forecolor="#330099" backcolor="#999999" uuid="a9669f95-bdcd-46eb-b1c2-4b8f3862a913"/>
 			</rectangle>
@@ -234,6 +231,6 @@
 		</band>
 	</summary>
 	<noData>
-		<band height="50"/>
+		<band height="81"/>
 	</noData>
 </jasperReport>

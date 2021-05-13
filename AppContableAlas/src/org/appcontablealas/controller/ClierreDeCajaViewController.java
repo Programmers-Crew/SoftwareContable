@@ -307,7 +307,7 @@ public class ClierreDeCajaViewController implements Initializable {
                 parametros.put("fechaFinal", "'"+fechaFinal+"'");
 
 
-                 GenerarReporte.mostrarReporte("ReporteVentas.jasper", "CIERRE DE CAJA", parametros);
+                 GenerarReporte.mostrarReporte("CierredecajaNormal.jasper", "CIERRE DE CAJA", parametros);
 
                 }catch(Exception e){
                     e.printStackTrace();
@@ -321,7 +321,6 @@ public class ClierreDeCajaViewController implements Initializable {
                     noti.show();
                 }
                 }
-
     }
 
     @FXML
