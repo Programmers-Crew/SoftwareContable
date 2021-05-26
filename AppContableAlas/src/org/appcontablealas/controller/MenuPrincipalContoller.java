@@ -559,6 +559,22 @@ public class MenuPrincipalContoller implements Initializable {
         cierreDeCaja();
     }
     
+        //Cierre de caja
+    public void pedidosEspeciales() throws IOException{
+        String inventarioUrl = "org/appcontablealas/view/pedidosEspeciales.fxml";
+        cambioScene.Cambio(inventarioUrl,(Stage) anchor.getScene().getWindow());
+    }
+    
+    @FXML
+    private void especialesView(ActionEvent event) throws IOException {
+        pedidosEspeciales();
+    }
+    
+    @FXML
+    private void especialesAtajo(MouseEvent event) throws IOException {
+        pedidosEspeciales();
+    }
+    
     //atajos de menu de bienvenida
     @FXML
     private void AtajosInicio(KeyEvent event) {
@@ -602,14 +618,15 @@ public class MenuPrincipalContoller implements Initializable {
                }else{
                    if(event.getCode() == KeyCode.F4){
                    pedidos();
+                   }else{
+                    if(event.getCode() == KeyCode.F5){
+                        pedidosEspeciales();
                    }
-                }
            }
-       }
-       
-        
+       }   
     }
-    
+       }
+    }
     public void accion(){
         switch(tipoOperacion){
             case AGREGAR:

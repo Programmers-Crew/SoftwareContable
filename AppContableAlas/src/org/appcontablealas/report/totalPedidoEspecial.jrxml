@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="totalPedidoEspecial" language="groovy" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8ed7561-a07e-4f5e-a7be-69d731d305e8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cliente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call SpTotalCierreDeCajaPedidosEspeciales($P!{fechaInicio},$P!{fechaFinal}, $P!{cliente})]]>
+	</queryString>
+	<field name="pedidoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoFecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total a pagar" class="java.math.BigDecimal"/>
+	<field name="Total a cobrar" class="java.math.BigDecimal"/>
+	<field name="Total" class="java.math.BigDecimal"/>
+	<field name="Pedidos Total Entregados" class="java.lang.Long"/>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<rectangle radius="6">
+				<reportElement x="0" y="0" width="555" height="25" forecolor="#00CCCC" backcolor="#00CCCC" uuid="32324408-9744-4fa7-bdb0-4d3faa50c9db"/>
+			</rectangle>
+			<textField>
+				<reportElement x="10" y="0" width="143" height="25" uuid="b970cb6c-cab6-4cc8-a088-bc579823782a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[PEDIDOS ENTREGADOS]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="0" width="100" height="25" uuid="0654b024-ea9e-4d0f-aff9-3ab8e87129f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[TOTAL A COBRAR]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="100" height="25" uuid="8f8f46c7-0db6-4d7b-951b-01abf1982105"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[TOTAL A PAGAR]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="0" width="86" height="25" uuid="b7585b16-3563-4c0c-b02d-2de803c5b884"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[TOTAL]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch"/>
+	</detail>
+</jasperReport>

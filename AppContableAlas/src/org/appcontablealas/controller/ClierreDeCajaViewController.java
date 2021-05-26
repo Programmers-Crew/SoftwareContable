@@ -35,6 +35,7 @@ import org.appcontablealas.report.GenerarReporte;
 import org.controlsfx.control.Notifications;
 
 
+
 public class ClierreDeCajaViewController implements Initializable {
 
         CambioScene cambioScene = new CambioScene();
@@ -524,6 +525,11 @@ public class ClierreDeCajaViewController implements Initializable {
     private void generarReporteCierreDeCajaM(MouseEvent event) {
         imprimirCierreDeCajaM();
     }
+    
+    
+    //PEDIDOS ESPECIALES
+    
+    
     
     //animaciones
     public void animacion(){

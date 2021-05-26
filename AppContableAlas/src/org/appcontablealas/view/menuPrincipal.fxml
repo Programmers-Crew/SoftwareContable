@@ -316,6 +316,7 @@
               <MenuItem mnemonicParsing="false" onAction="#Clientesview" text="CLIENTES               F1" />
                   <MenuItem mnemonicParsing="false" onAction="#reportesView" text="REPORTES             F2" />
                   <MenuItem mnemonicParsing="false" onAction="#cierreDeCajaView" text="CIERRE DE CAJA   F3" />
+                  <MenuItem mnemonicParsing="false" onAction="#especialesView" text="P.ESPECIALES         F5" />
                   <MenuItem fx:id="itemInventario" mnemonicParsing="false" onAction="#pedidosView" text="PEDIDOS                 F4" />
             </items>
           </Menu>

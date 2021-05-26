@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PedidosEspeciales" language="groovy" pageWidth="612" pageHeight="792" orientation="Landscape" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f8f6cf3-561f-49a2-93c1-38c9cb24eb8c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cliente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[call SpPedidosEspecialesReport($P!{fechaInicio},$P!{fechaFinal},$P!{cliente})]]>
+	</queryString>
+	<field name="pedidoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoFecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comentarioMensajero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="empresaDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mensajero" class="java.lang.String"/>
+	<field name="pedidoMonto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pedidoCosto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="formaPagoDesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="752" splitType="Stretch">
+			<rectangle radius="0">
+				<reportElement x="-7" y="685" width="579" height="67" backcolor="#000000" uuid="9200d60b-ef5c-4dbe-bba1-a11aa670ef61"/>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="572" height="67" uuid="65cd941f-5798-42cd-9b14-32c14d3ec2f0"/>
+				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\fondoSinNubbes.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="-7" y="0" width="134" height="80" uuid="579963e2-34a2-4fbd-a091-cc42442ad304"/>
+				<imageExpression><![CDATA["C:\\git\\SoftwareContable\\AppContableAlas\\src\\org\\appcontablealas\\report\\logoAlas.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="732" width="100" height="20" forecolor="#666666" backcolor="#000000" uuid="1763a19b-c28e-4d7a-8530-dcbc7cb83db7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[© ALAS GT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="700" width="297" height="17" forecolor="#999999" backcolor="#000000" uuid="5c49fa70-663e-487c-b542-4cb86457e82d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA["Este reporte es exclusivamente para uso admnistrativo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="116" y="717" width="350" height="20" forecolor="#999999" backcolor="#000000" uuid="a1711761-ee7b-4214-9973-57c9bb86a308"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Esta completamente prohibido revelar esta informacion al publico general""]]></text>
+			</staticText>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="245" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="0" y="0" width="572" height="74" forecolor="#FFFFFF" uuid="6c699064-5733-49e5-bf8d-d54c05466b85"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="26" isBold="true" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ALAS GT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="153" y="85" width="297" height="35" forecolor="#000000" uuid="845f0dc4-1675-4c37-a7fe-3bbc4f8422c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PEDIDOS ESPECIALES"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="544" y="95" width="27" height="15" uuid="ec81638e-5ae0-4f4b-821c-2acab4010300"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="95" width="26" height="15" uuid="93de8f07-0352-4dfc-92fe-c6860302d057"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="534" y="95" width="10" height="15" uuid="ee81a12d-fb08-4b66-b4af-9bf822fffa8e"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="90" width="64" height="20" uuid="afb57835-f15f-4c64-ada1-98bc008e75ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="90" width="64" height="20" uuid="25caba77-c15e-413c-b01a-06510a97ba4e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="-19" y="145" width="200" height="100" uuid="ca6cf0e3-3390-41ab-9719-a4b086661c2b"/>
+				<subreportParameter name="fechaInicio">
+					<subreportParameterExpression><![CDATA[$P{fechaInicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaFinal">
+					<subreportParameterExpression><![CDATA[$P{fechaFinal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cliente">
+					<subreportParameterExpression><![CDATA[$P{cliente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TotalPedidoEspeciales.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="21" width="572" height="20" forecolor="#330099" backcolor="#999999" uuid="d19a14d0-c879-4a5a-9d37-8de7c5df25b8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="99" y="21" width="63" height="20" uuid="9697fad0-6176-4f97-9b85-0a22a9c08344"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONO RECEPTOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="21" width="48" height="20" uuid="654d8d28-0907-48fb-a3d0-fc483aaea57f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="21" width="50" height="20" uuid="ccab18e5-99ee-4128-b277-70795444de30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="21" width="80" height="20" uuid="1980de5f-9bf5-49ae-a8bb-bec1211e1f9b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMA PAGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="21" width="63" height="20" uuid="65d2a410-c2cf-4f40-8462-b0ef68379e46"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="21" width="80" height="20" uuid="ffcd1e06-76d2-4812-9606-30f5de30d9fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="119" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="101" width="572" height="1" uuid="0d910800-d9f0-486a-bbf0-ee691c8fdfc9"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="385" y="0" width="81" height="20" uuid="fd77d8d0-3e4b-4808-8906-17f5c76143df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{formaPagoDesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="48" height="20" uuid="9d7452cd-7ae6-4398-87ed-0e68b7881b41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidoMonto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="0" width="50" height="20" uuid="def78ca6-b585-49d5-8351-0e8e968d9bc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidoCosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="10" width="63" height="20" uuid="1e675ec4-3848-4326-9b31-1963dc11414d"/>
+				<textFieldExpression><![CDATA[$F{pedidoId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="54" width="86" height="37" uuid="bd8db07e-2524-46ca-b983-7e3586c6cb5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACIÓN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="54" width="438" height="48" uuid="ebe52eba-50be-41c7-b313-763b5a42067e"/>
+				<textFieldExpression><![CDATA[$F{pedidoDesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="63" height="20" uuid="346ab4c6-83de-4c57-be97-7ce6312e23db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="0" width="65" height="20" uuid="7d26a35c-51a7-4d31-ba1d-06de67a33a07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidoFecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="67" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="50"/>
+	</noData>
+</jasperReport>
